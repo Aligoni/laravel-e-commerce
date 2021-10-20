@@ -39,13 +39,31 @@
             height: 100%;
         }
 
-        .product-card {
-            width: 40%;
-            margin: 5%;
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 19;
+            background: rgba(0, 0, 0, 0.505);
+            padding: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            width: 90vw;
+        }
+
+        .admin-product-card {
+            width: 43%;
+            margin: 3%;
             border-radius: 0.25rem;
         }
-        
-        .product-card img {
+
+        .admin-product-card img {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -56,52 +74,33 @@
             max-width: 100%;
         }
 
-        .product-card:hover {
+        .admin-product-card:hover {
             box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
         @media screen and (min-width: 600px) {
-            .product-card {
+            .admin-product-card {
                 width: 20%;
                 margin: 2.5%;
+            }
+
+            .modal {
+                padding: 20%;
+            }
+            
+            .modal-content {
+                width: 40vw;
             }
         }
     </style>
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative hidden flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}"
-                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-            @endif
-            @endauth
-        </div>
-        @endif
-
-    </div>
     <div class="flex flex-col min-h-screen w-screen relative">
         <div x-data="{ open: false }" class="z-10 fixed inset-x-0 top-0">
             <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
-                <a href="/"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
+                <a href="{{ route('admin') }}"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
                 <nav class="flex justify-evenly">
-                    <a href="{{ route('products') }}" class="mx-4">
-                        <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Products</p>
-                    </a>
-                    <a href="" class="mx-4">
-                        <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Cart</p>
-                    </a>
-
-                    <!-- Hamburger -->
-                    @auth
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -122,9 +121,6 @@
 
                             <x-slot name="content">
                                 <!-- Authentication -->
-                                <x-dropdown-link :href="route('logout')">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <x-dropdown-link :href="route('logout')"
@@ -136,11 +132,6 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                    @else
-                    <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
-                        <p class="text-xl text-gray-700 font-bold hover:text-blue-500">Login</p>
-                    </a>
-                    @endauth
                     <div class="-mr-2 flex items-center sm:hidden">
                         <button @click="open = ! open"
                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -161,33 +152,9 @@
 
                 <!-- Responsive Settings Options -->
                 <div class="border-t border-gray-200">
-                    @auth
                     <div class="p-5 border-b border-gray-300">
-                        <div class="font-medium text-lg text-gray-800">Logged in as:</div>
+                        <div class="font-medium text-lg text-gray-800">Logged in (Admin) as:</div>
                         <div class="font-medium text-lg text-gray-800">{{ Auth::user()->name }}</div>
-                        {{-- <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div> --}}
-                    </div>
-                    @endauth
-                    <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('/')" :active="request()->routeIs('/')">
-                            {{ __('Home') }}
-                        </x-responsive-nav-link>
-                    </div>
-                    <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                            {{ __('Products') }}
-                        </x-responsive-nav-link>
-                    </div>
-                    <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Cart') }}
-                        </x-responsive-nav-link>
-                    </div>
-                    @auth
-                    <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Profile') }}
-                        </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1">
                         <!-- Authentication -->
@@ -200,17 +167,10 @@
                             </x-responsive-nav-link>
                         </form>
                     </div>
-                    @else
-                    <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Login') }}
-                        </x-responsive-nav-link>
-                    </div>
-                    @endauth
                 </div>
             </div>
         </div>
-        
+
         @yield('content')
     </div>
 </body>

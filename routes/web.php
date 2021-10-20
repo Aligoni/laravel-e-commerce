@@ -13,14 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__.'/auth.php';
+
 Route::get('/', function () {
     return view('landing');
-});
+})->name('/');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::get('/admin/login', 
+    [App\Http\Controllers\Admin\LoginController::class, 'create'])->middleware('admin')->name('admin.login');
 
-Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::post('/admin/login', 
+    [App\Http\Controllers\Admin\LoginController::class, 'store'])->middleware('admin');
+
+Route::get('/admin', 
+    [App\Http\Controllers\Admin\MainController::class, 'landingPage'])->middleware('admin')->name('admin');
+
+Route::get('/admin/products', 
+    [App\Http\Controllers\Admin\MainController::class, 'products'])->middleware('admin')->name('admin.products');
+
+Route::post('/admin/products', 
+    [App\Http\Controllers\Admin\MainController::class, 'addProduct'])->middleware('admin');
+
+Route::get('/products', 
+    [App\Http\Controllers\ProductController::class, 'index'])->name('products');
