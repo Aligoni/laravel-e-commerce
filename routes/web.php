@@ -41,5 +41,11 @@ Route::get('/admin/products',
 Route::post('/admin/products', 
     [App\Http\Controllers\Admin\MainController::class, 'addProduct'])->middleware('admin');
 
+Route::put('/admin/products', 
+    [App\Http\Controllers\Admin\MainController::class, 'editProduct'])->middleware('admin')->name('admin.products');
+
+Route::delete('/admin/products', 
+    [App\Http\Controllers\Admin\MainController::class, 'destroyProduct'])->middleware('admin');
+
 Route::get('/products', 
     [App\Http\Controllers\ProductController::class, 'index'])->name('products');

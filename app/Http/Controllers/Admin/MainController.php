@@ -28,7 +28,24 @@ class MainController extends Controller
             $add = 0;
         }
 
-        return view ('admin.products', [ 'add' => $add, 'products' => $products ]);
+        $productId = request('id');
+        $edit = 0;
+        $product = null;
+        if (isset($productId)) {
+            $product = Product::find($productId);
+            if ($product) {
+                $edit = 1;
+            } else {
+                return redirect()->route('admin.products');
+            }
+        }
+
+        return view ('admin.products', [ 
+            'add' => $add, 
+            'products' => $products, 
+            'product' => $product,
+            'edit' => $edit
+        ]);
     }
 
     public function addProduct(Request $request) {
@@ -41,6 +58,34 @@ class MainController extends Controller
         $product->price = $request->price;
 
         $product->save();
+        return redirect()->route('admin.products');
+    }
+
+    public function editProduct (Request $request) {
+        $product = Product::find($request->id);
+        if (!$product) {
+            return redirect()->route('admin.products');
+        }
+
+        $product->name = $request->name;
+        $product->color = $request->color;
+        $product->image = $request->image;
+        $product->type = $request->type;
+        $product->size = $request->size;
+        $product->price = $request->price;
+        $product->save();
+
+        return redirect()->route('admin.products');
+    }
+
+    public function destroyProduct(Request $request) {
+        $product = Product::find($request->id);
+        if (!$product) {
+            return redirect()->route('admin.products');
+        }
+
+        $product->delete();
+
         return redirect()->route('admin.products');
     }
 }
