@@ -27,7 +27,10 @@ Route::get('/admin/login',
     [App\Http\Controllers\Admin\LoginController::class, 'create'])->middleware('admin')->name('admin.login');
 
 Route::post('/admin/login', 
-    [App\Http\Controllers\Admin\LoginController::class, 'store'])->middleware('admin');
+    [App\Http\Controllers\Admin\LoginController::class, 'store']);
+
+Route::post('/admin/logout', 
+    [App\Http\Controllers\Admin\LoginController::class, 'destroy'])->middleware('admin')->name('admin.logout');
 
 Route::get('/admin', 
     [App\Http\Controllers\Admin\MainController::class, 'landingPage'])->middleware('admin')->name('admin');

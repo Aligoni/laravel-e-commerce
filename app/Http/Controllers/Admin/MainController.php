@@ -22,12 +22,13 @@ class MainController extends Controller
 
     public function products() {
 
+        $products = Product::orderBy('updated_at', 'desc')->get();
         $add = request('add');
         if ($add != 1) {
             $add = 0;
         }
 
-        return view ('admin.products', [ 'add' => $add ]);
+        return view ('admin.products', [ 'add' => $add, 'products' => $products ]);
     }
 
     public function addProduct(Request $request) {
@@ -37,6 +38,7 @@ class MainController extends Controller
         $product->image = $request->image;
         $product->type = $request->type;
         $product->size = $request->size;
+        $product->price = $request->price;
 
         $product->save();
         return redirect()->route('admin.products');

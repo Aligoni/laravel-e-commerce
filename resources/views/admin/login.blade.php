@@ -22,7 +22,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('admin.login') }}">
+        <form method="POST" action="/admin/login">
             @csrf
             
             <input type="hidden" id="role" name="role" value="ADMIN">
@@ -52,11 +52,6 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                {{-- @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif --}}
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>

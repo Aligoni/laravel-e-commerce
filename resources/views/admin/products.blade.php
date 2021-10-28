@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="mt-12 py-20 px-4 md:px-20">
+    <div class="text-center mb-10">
+        <p class="text-3xl">
+            Admin Section
+        </p>
+    </div>
     @if ($add == 1)
         <div class="modal relative">
             <div class="modal-content bg-white shadow-lg pt-4">
@@ -45,6 +50,11 @@
                             <x-input id="type" class="block mt-1 w-full" type="text" name="type" :value="old('type')" required autofocus />
                         </div>
                         <div class="mt-4">
+                            <x-label for="price" :value="__('Price')" />
+                        
+                            <x-input id="price" class="block mt-1 w-full" type="text" name="price" :value="old('price')" required autofocus />
+                        </div>
+                        <div class="mt-4">
                             <x-label for="image" :value="__('Image Url')" />
                         
                             <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="old('image')" required autofocus />
@@ -72,67 +82,30 @@
             Add
         </a>
     </div>
-    <div class="flex justify-start w-full flex-wrap">
-        <div class="admin-product-card shadow-lg">
-            <a href="/">
-                <div class="h-48 md:h-60 flex relative">
-                    <img src="/images/shirt.jpg" alt="">
+    @if (count($products) > 0)
+        <div class="flex justify-start w-full flex-wrap">
+            @foreach ($products as $item)
+                <div class="admin-product-card shadow-lg">
+                    <a href="/">
+                        <div class="h-48 md:h-60 flex relative">
+                            <img src="{{ $item->image }}"
+                                alt="product image">
+                        </div>
+                        <div class="p-2">
+                            <p class="text-2xl text-blue-600">{{$item->name}}</p>
+                            <p class="text-xl">Type: {{$item->type}}</p>
+                            <p class="text-xl">Color: {{$item->color}}</p>
+                            <p class="text-xl">Size: {{$item->size}}</p>
+                            {{-- <p class="text-xl">{{$item->price}}</p> --}}
+                        </div>
+                    </a>
                 </div>
-                <div class="p-2">
-                    <p class="text-2xl text-blue-600">Plain T-shirt</p>
-                    <p class="text-xl">Black</p>
-                    <p class="text-xl">N5000</p>
-                </div>
-            </a>
+            @endforeach
         </div>
-        <div class="admin-product-card shadow-lg">
-            <a href="/">
-                <div class="h-48 md:h-60 flex relative">
-                    <img src="/images/shirt.jpg" alt="">
-                </div>
-                <div class="p-2">
-                    <p class="text-2xl text-blue-600">Plain T-shirt</p>
-                    <p class="text-xl">Black</p>
-                    <p class="text-xl">N5000</p>
-                </div>
-            </a>
+    @else
+        <div class="text-center">
+            <p class="text-3xl">No Product Yet</p>
         </div>
-        <div class="admin-product-card shadow-lg">
-            <a href="/">
-                <div class="h-48 md:h-60 flex relative">
-                    <img src="/images/shirt.jpg" alt="">
-                </div>
-                <div class="p-2">
-                    <p class="text-2xl text-blue-600">Plain T-shirt</p>
-                    <p class="text-xl">Black</p>
-                    <p class="text-xl">N5000</p>
-                </div>
-            </a>
-        </div>
-        <div class="admin-product-card shadow-lg">
-            <a href="/">
-                <div class="h-48 md:h-60 flex relative">
-                    <img src="/images/shirt.jpg" alt="">
-                </div>
-                <div class="p-2">
-                    <p class="text-2xl text-blue-600">Plain T-shirt</p>
-                    <p class="text-xl">Black</p>
-                    <p class="text-xl">N5000</p>
-                </div>
-            </a>
-        </div>
-        <div class="admin-product-card shadow-lg">
-            <a href="/">
-                <div class="h-48 md:h-60 flex relative">
-                    <img src="/images/shirt.jpg" alt="">
-                </div>
-                <div class="p-2">
-                    <p class="text-2xl text-blue-600">Plain T-shirt</p>
-                    <p class="text-xl">Black</p>
-                    <p class="text-xl">N5000</p>
-                </div>
-            </a>
-        </div>
-    </div>
+    @endif
 </div>
 @endsection

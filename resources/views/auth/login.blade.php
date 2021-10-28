@@ -22,6 +22,7 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
+            <input type="hidden" id="role" name="role" value="CUSTOMER">
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('Email')" />
