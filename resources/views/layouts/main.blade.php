@@ -60,6 +60,21 @@
             box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
+        .single-card {
+            height: 50vh;
+        }
+
+        .single-card img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: auto;
+            height: auto;
+            max-height: 100%;
+            max-width: 100%;
+        }
+
         @media screen and (min-width: 600px) {
             .product-card {
                 width: 20%;

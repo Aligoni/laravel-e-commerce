@@ -13,4 +13,13 @@ class ProductController extends Controller
         
         return view('products.index', [ 'products'=> $products ]);
     }
+
+    public function show($id) {
+        $product = Product::find($id);
+        if (!$product) {
+            return redirect()->route('products');
+        }
+
+        return view('products.show', [ 'product' => $product ]);
+    }
 }

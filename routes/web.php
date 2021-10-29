@@ -49,3 +49,6 @@ Route::delete('/admin/products',
 
 Route::get('/products', 
     [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+    
+Route::get('/products/{id}', 
+    [App\Http\Controllers\ProductController::class, 'show']);

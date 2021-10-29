@@ -11,7 +11,7 @@
             <div class="flex justify-start w-full flex-wrap">
                 @foreach ($products as $item)
                     <div class="product-card  shadow-lg">
-                        <a href="/">
+                        <a href="/products/{{$item->id}}">
                             <div class="h-48 md:h-60 flex relative">
                                 <img src="{{$item->image}}" alt="">
                             </div>
