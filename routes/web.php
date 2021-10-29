@@ -52,3 +52,6 @@ Route::get('/products',
     
 Route::get('/products/{id}', 
     [App\Http\Controllers\ProductController::class, 'show']);
+        
+Route::post('/products/{id}', 
+    [App\Http\Controllers\ProductController::class, 'addToCart'])->middleware(['auth']);

@@ -15,24 +15,33 @@
                 <img src="{{$product->image}}" alt="">
             </div>
             <div class="md:flex-1 py-5 px-4">
-                <div class="md:pr-32">
+                <div class="md:pr-52">
                     <p class="text-4xl text-blue-600">{{$product->name}}</p>
-                    <div class="border-b h-1 border-gray-300 my-2"></div>
-                    <span class="text-2xl mr-3">Type:</span>
-                    <span class="text-2xl font-bold">{{$product->type}}</span>
-                    <div class="border-b h-1 border-gray-300 my-2"></div>
-                    <span class="text-2xl mr-3">Color:</span>
-                    <span class="text-2xl font-bold">{{$product->color}}</span>
-                    <div class="border-b h-1 border-gray-300 my-2"></div>
-                    <span class="text-2xl mr-3">Size:</span>
-                    <span class="text-2xl font-bold">{{$product->size}}</span>
-                    <div class="border-b h-1 border-gray-300 my-2"></div>
-                    <span class="text-2xl mr-3">Price:</span>
-                    <span class="text-2xl font-bold">{{$product->price}}</span>
-                    <div class="border-b h-1 border-gray-300 my-2"></div>
-                    <form method="POST" action="">
-                        <x-button class="mt-4 w-full">
-                            {{ __('Add to cart') }}
+                    <div class="border-b md:flex h-1 border-gray-300 py-2"></div>
+                    <div class="border-b md:flex border-gray-300 py-3">
+<span class="text-2xl mr-3 md:flex-1">Type:</span>
+<span class="text-2xl font-bold md:flex-5">{{$product->type}}</span>
+                    </div>
+                    <div class="border-b md:flex border-gray-300 py-3">
+<span class="text-2xl mr-3 md:flex-1">Color:</span>
+<span class="text-2xl font-bold md:flex-5">{{$product->color}}</span>
+                    </div>
+                    <div class="border-b md:flex border-gray-300 py-3">
+<span class="text-2xl mr-3 md:flex-1">Size:</span>
+<span class="text-2xl font-bold md:flex-5">{{$product->size}}</span>
+                    </div>
+                    <div class="border-b md:flex border-gray-300 py-3">
+<span class="text-2xl mr-3 md:flex-1">Price:</span>
+<span class="text-2xl font-bold md:flex-5">{{$product->price}}</span>
+                    </div>
+                    <form method="POST" action="/products/{{$product->id}}">
+                        @csrf
+                        <x-button class="mt-4 w-full block py-4" style="display: block">
+                            @if ($found)
+                                {{ __('Add quantity') }}
+                            @else
+                                {{ __('Add to cart') }}
+                            @endif
                         </x-button>
                     </form>
                 </div>
