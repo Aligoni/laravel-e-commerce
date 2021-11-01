@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use Auth;
 
 class CartController extends Controller
@@ -25,58 +27,57 @@ class CartController extends Controller
             'total_price' => $price 
         ]);
     }
+    
+    public function checkout() {
+        $price = 0;
+        $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
-    public function show($id) {
-        $product = Product::find($id);
-        if (!$product) {
-            return redirect()->route('products');
+        foreach ($cart_items as $item) {
+            $price += $item->product->price * $item->quantity;
         }
 
-        $quantity = 0;
-        $found = false;
-        if (Auth::check()) {
-            $cart_items = Cart::where('user_id', Auth()->user()->id)->get();
-            foreach ($cart_items as $item) {
-                if ($item->product_id == $id) {
-                    $found = true;
-                    $quantity = $item->quantity;
-                }
-            }
+        if ($price == 0) {
+            return redirect()->route('products')->with('warning', 'Error checking out. Your cart is empty');
         }
 
-        return view('products.show', [ 
-            'product' => $product, 
-            'found' => $found, 
-            'quantity' => $quantity 
+        return view('cart.checkout', [ 
+            'items' => $cart_items, 
+            'total_price' => $price 
         ]);
     }
 
-    public function addTocart($id) {
-        $product = Product::find($id);
-        if (!$product) {
-            return redirect()->route('products');
-        }
-
+    public function placeOrder(Request $request) {
+        $price = 0;
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
-        $found = false;
+        foreach ($cart_items as $item) {
+            $price += $item->product->price * $item->quantity;
+        }
+        
+        $order = new Order;
+        $order->user_id = Auth()->user()->id;
+        $order->address = $request->address;
+        $order->total_price = $price;
+        $order->save();
+
+        $order = Order::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->first();
 
         foreach ($cart_items as $item) {
-            if ($item->product_id == $id) {
-                $found = true;
-                $item->quantity++;
-                $item->save();
-            }
+            $orderProduct = new OrderProduct;
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $item->product_id;
+            $orderProduct->name = $item->product->name;
+            $orderProduct->color = $item->product->color;
+            $orderProduct->size = $item->product->size;
+            $orderProduct->type = $item->product->type;
+            $orderProduct->price = $item->product->price;
+            $orderProduct->image = $item->product->image;
+            $orderProduct->quantity = $item->quantity;
+            $orderProduct->save();
+
+            $item->delete();
         }
 
-        if (!$found) {
-            $cart_item = new Cart;
-            $cart_item->user_id = Auth()->user()->id;
-            $cart_item->product_id = $id;
-            $cart_item->quantity = 1;
-            $cart_item->save();
-        }
-
-        return redirect('products/'.$id);
-    } 
+        return redirect()->route('/')->with('message', 'Order Placed Successfully');
+    }
 }

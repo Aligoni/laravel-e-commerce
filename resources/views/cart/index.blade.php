@@ -88,9 +88,17 @@
                 </div>
             </div>
         @endforeach
-        <div class="flex justify-end items-center my-6 md:mx-6 p-3 md:p-6 bg-red-700 rounded shadow-lg">
-            <p class="text-2xl  text-white">Total Price:</p>
-            <p class="text-3xl text-white mx-5">N{{$total_price}}</p>
+        <div class="flex justify-end items-center my-6 md:mx-6 p-3 md:p-6 bg-white rounded shadow-lg">
+            <p class="text-2xl text-red-700 text-white">Total Price:</p>
+            <p class="text-3xl text-red-700 text-white mx-5">N{{$total_price}}</p>
+        </div>
+        <div class="flex my-6 justify-end md:mr-6">
+            <a href="{{ route('products') }}" style="display: block" class="md:text-xl md:w-1/4 text-white text-center rounded shadow-lg py-2 md:px-6 flex-1 md:flex-none bg-blue-700 mr-2 hover:bg-blue-600">
+                {{ __('Continue shopping') }}
+            </a>
+            <a href="{{ route('cart.checkout') }}" style="display: block" class="md:text-xl md:w-1/4 text-white text-center rounded shadow-lg py-2 md:px-6 flex-1 md:flex-none bg-green-700 ml-2 hover:bg-green-600">
+                {{ __('Checkout') }}
+            </a>
         </div>
     @else
         <div class="single-card flex justify-center items-center" style="background: initial">

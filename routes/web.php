@@ -33,6 +33,12 @@ Route::delete('/products/{id}',
 
 Route::get('/cart', 
     [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('cart');
+
+Route::get('/cart/checkout', 
+    [App\Http\Controllers\CartController::class, 'checkout'])->middleware('auth')->name('cart.checkout');
+    
+Route::post('/cart/checkout', 
+    [App\Http\Controllers\CartController::class, 'placeOrder'])->middleware('auth');
     
 Route::get('/admin/login', 
     [App\Http\Controllers\Admin\LoginController::class, 'create'])->middleware('admin')->name('admin.login');

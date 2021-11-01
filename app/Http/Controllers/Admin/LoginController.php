@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('admin');
+        return redirect('admin')->with('message', 'Login Successful');
     }
 
     /**
