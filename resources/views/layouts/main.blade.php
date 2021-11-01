@@ -42,8 +42,8 @@
 
         .product-card {
             background-color: white;
-            width: 40%;
-            margin: 5%;
+            width: 45%;
+            margin: 2.5%;
             border-radius: 0.25rem;
         }
         
@@ -89,6 +89,31 @@
             height: auto;
             max-height: 100%;
             max-width: 100%;
+        }
+
+        .alert {
+            position: fixed;
+            z-index: 40;
+            top: 50px;
+            left: 0;
+            right: 0;
+            animation: alert-fade 4s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes alert-fade {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
         }
 
         @media screen and (min-width: 600px) {
@@ -225,6 +250,8 @@
         </div>
         
         @yield('content')
+
+        @include('include.feedback')
     </div>
 </body>
 

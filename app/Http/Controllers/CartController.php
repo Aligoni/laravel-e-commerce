@@ -13,10 +13,10 @@ class CartController extends Controller
     public function index() {
         $price = 0;
         $found = false;
-        $cart_items = Cart::where('user_id', Auth()->user()->id)->get();
+        $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
         foreach ($cart_items as $item) {
-            $price+= $item->price * $item->quantity;
+            $price += $item->product->price * $item->quantity;
         }
 
         return view('cart.index', [ 

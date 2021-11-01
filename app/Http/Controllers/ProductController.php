@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function show($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products');
+            return redirect()->route('products')->with('message', 'Product not found');
         }
 
         $quantity = 0;
@@ -44,7 +44,7 @@ class ProductController extends Controller
     public function addTocart($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products');
+            return redirect()->route('products')->with('message', 'Product not found');
         }
 
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
@@ -67,35 +67,35 @@ class ProductController extends Controller
             $cart_item->save();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Item added to cart successfully');
     } 
     
     public function removeFromCart($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products');
+            return redirect()->route('products')->with('message', 'Product not found');
         }
 
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
-        $found = false;
+        $deleted = true;
 
         foreach ($cart_items as $item) {
             if ($item->product_id == $id) {
-                $found = true;
                 if ($item->quantity == 1) {
                     $item->delete();
                 } else {
                     $item->quantity--;
+                    $deleted = false;
                     $item->save();
                 }
             }
         }
 
-        if (!$found) {
-            return redirect()->back();
+        if (!$deleted) {
+            return redirect()->back()->with('message', 'Item quantity reduced successfully');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Item removed successfully');
     } 
 }

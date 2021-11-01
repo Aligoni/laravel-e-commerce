@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="mt-20 py-10 mx-6 md:mx-20">
-        <div class="flex justify-between items-center">
+    <div class="mt-20 py-10 mx-2 md:mx-20">
+        <div class="flex justify-between items-center mx-4">
             <p class="text-3xl">Products</p>
             <p class="text-xl text-blue-500">{{count($products)}} Item(s) found</p>
         </div>
@@ -13,7 +13,7 @@
                     <div class="product-card  shadow-lg">
                         <a href="/products/{{$item->id}}">
                             <div class="h-48 md:h-60 flex relative">
-                                <img src="{{$item->image}}" alt="">
+                                <img src="{{$item->image}}" alt="product image">
                             </div>
                             <div class="p-2">
                                 <p class="text-2xl text-blue-600">{{$item->name}}</p>
