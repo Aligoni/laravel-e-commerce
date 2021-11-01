@@ -31,6 +31,9 @@ Route::post('/products/{id}',
 Route::delete('/products/{id}', 
     [App\Http\Controllers\ProductController::class, 'removeFromCart'])->middleware(['auth']);
 
+Route::get('/profile', 
+    [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile');
+
 Route::get('/cart', 
     [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('cart');
 

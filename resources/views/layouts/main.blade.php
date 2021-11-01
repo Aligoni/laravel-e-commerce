@@ -91,6 +91,26 @@
             max-width: 100%;
         }
 
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 19;
+            background: rgba(0, 0, 0, 0.505);
+            padding: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            width: 90vw;
+            max-height: 90vh;
+            overflow-y: scroll;
+        }
+
         .alert {
             position: fixed;
             z-index: 40;
@@ -111,7 +131,7 @@
             }
 
             100% {
-                opacity: 0;
+                opacity: 0;profile
                 display: none;
             }
         }
@@ -120,6 +140,14 @@
             .product-card {
                 width: 20%;
                 margin: 2.5%;
+            }
+
+            .modal {
+                padding: 20%;
+            }
+
+            .modal-content {
+                width: 40vw;
             }
         }
     </style>
@@ -160,7 +188,7 @@
 
                             <x-slot name="content">
                                 <!-- Authentication -->
-                                <x-dropdown-link :href="route('logout')">
+                                <x-dropdown-link :href="route('profile')">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
                                 <form method="POST" action="{{ route('logout') }}">
@@ -223,7 +251,7 @@
                     </div>
                     @auth
                     <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                        <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
                     </div>
