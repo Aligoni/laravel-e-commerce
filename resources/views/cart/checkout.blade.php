@@ -21,12 +21,12 @@
                         {{$item->quantity}}
                     </div>
                     <div class="flex-1 text-center text-blue-600">
-                        {{$item->product->price}}
+                        £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->product->price)),2)}}
                     </div>
                 </div>
             @endforeach
             <div class="flex justify-end p-4">
-                <p class="text-xl">Total Price: {{$total_price}}</p>
+                <p class="text-xl">Total Price: £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $total_price)),2)}}</p>
             </div>
         </div>
         <div class="md:flex-1 m-4 rounded bg-white shadow-lg w-full border border-gray-300">

@@ -32,7 +32,7 @@
                     </div>
                     <div class="border-b md:flex border-gray-300 py-3">
 <span class="text-2xl mr-3 md:flex-1">Price:</span>
-<span class="text-2xl font-bold md:flex-5">{{$product->price}}</span>
+<span class="text-2xl font-bold md:flex-5">£{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $product->price)),2)}}</span>
                     </div>
                     <form method="POST" action="/products/{{$product->id}}">
                         @csrf

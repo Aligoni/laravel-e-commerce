@@ -18,14 +18,16 @@
                             <div class="p-2">
                                 <p class="text-2xl text-blue-600">{{$item->name}}</p>
                                 <p class="text-xl">{{$item->color}}</p>
-                                <p class="text-xl">N{{$item->price}}</p>
+                                <p class="text-xl">£{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->price)),2)}}</p>
                             </div>
                         </a>
                     </div>
                 @endforeach
             </div>
         @else
-            
+            <div class="single-card flex justify-center items-center" style="background: initial">
+                <p class="text-4xl text-center text-blue-800">NO PRODUCT YET</p>
+            </div>
         @endif
     </div>
 @endsection

@@ -131,7 +131,7 @@
             }
 
             100% {
-                opacity: 0;profile
+                opacity: 0;
                 display: none;
             }
         }

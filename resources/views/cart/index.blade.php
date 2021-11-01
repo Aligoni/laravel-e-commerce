@@ -63,7 +63,7 @@
                     {{$item->product->size}}
                 </div>
                 <div class="flex-1 text-center text-lg border-l border-gray-400">
-                    {{$item->product->price}}
+                    £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->product->price * $item->quantity)),2)}}
                 </div>
                 <div class="flex justify-center items-center flex-1 text-center text-lg border-l border-gray-400">
                     <form method="POST" action="/products/{{$item->product_id}}" class="inline-block">
@@ -84,13 +84,13 @@
                     </form>
                 </div>
                 <div class="flex-1 text-center text-lg border-l border-gray-400">
-                    {{$item->product->price * $item->quantity}}
+                    £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->product->price * $item->quantity)),2)}}
                 </div>
             </div>
         @endforeach
         <div class="flex justify-end items-center my-6 md:mx-6 p-3 md:p-6 bg-white rounded shadow-lg">
             <p class="text-2xl text-red-700 text-white">Total Price:</p>
-            <p class="text-3xl text-red-700 text-white mx-5">N{{$total_price}}</p>
+            <p class="text-3xl text-red-700 text-white mx-5">£{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $total_price)),2)}}</p>
         </div>
         <div class="flex my-6 justify-end md:mr-6">
             <a href="{{ route('products') }}" style="display: block" class="md:text-xl md:w-1/4 text-white text-center rounded shadow-lg py-2 md:px-6 flex-1 md:flex-none bg-blue-700 mr-2 hover:bg-blue-600">
