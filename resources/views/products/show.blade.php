@@ -10,7 +10,7 @@
             </a>
         </div>
 
-        <div class="flex md:flex-1 md:items-center flex-col md:flex-row w-full md:mx-10">
+        <div class="flex md:flex-1 md:items-center flex-col md:flex-row w-full md:mx-10 mt-8 md:mt-1">
             <div class="md:flex-1 single-card relative">
                 <img src="{{$product->image}}" alt="">
             </div>

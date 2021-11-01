@@ -17,12 +17,23 @@ require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('landing');
-})->name('/');
+})->middleware('customer')->name('/');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/products', 
+    [App\Http\Controllers\ProductController::class, 'index'])->middleware('customer')->name('products');
+    
+Route::get('/products/{id}', 
+    [App\Http\Controllers\ProductController::class, 'show'])->middleware('customer');
+        
+Route::post('/products/{id}', 
+    [App\Http\Controllers\ProductController::class, 'addToCart'])->middleware(['auth']);
+    
+Route::delete('/products/{id}', 
+    [App\Http\Controllers\ProductController::class, 'removeFromCart'])->middleware(['auth']);
 
+Route::get('/cart', 
+    [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('cart');
+    
 Route::get('/admin/login', 
     [App\Http\Controllers\Admin\LoginController::class, 'create'])->middleware('admin')->name('admin.login');
 
@@ -46,12 +57,3 @@ Route::put('/admin/products',
 
 Route::delete('/admin/products', 
     [App\Http\Controllers\Admin\MainController::class, 'destroyProduct'])->middleware('admin');
-
-Route::get('/products', 
-    [App\Http\Controllers\ProductController::class, 'index'])->name('products');
-    
-Route::get('/products/{id}', 
-    [App\Http\Controllers\ProductController::class, 'show']);
-        
-Route::post('/products/{id}', 
-    [App\Http\Controllers\ProductController::class, 'addToCart'])->middleware(['auth']);

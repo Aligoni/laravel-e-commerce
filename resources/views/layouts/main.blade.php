@@ -21,6 +21,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
+            background: rgb(250, 247, 247);
         }
 
         .app-background {
@@ -40,6 +41,7 @@
         }
 
         .product-card {
+            background-color: white;
             width: 40%;
             margin: 5%;
             border-radius: 0.25rem;
@@ -56,11 +58,25 @@
             max-width: 100%;
         }
 
+        .cart-image {
+        }
+        
+        .cart-image img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: auto;
+            height: auto;
+            max-height: 100%;
+            max-width: 100%;
+        }
         .product-card:hover {
             box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
         .single-card {
+            background-color: white;
             height: 50vh;
         }
 
@@ -85,24 +101,6 @@
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative hidden flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}"
-                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-            @endif
-            @endauth
-        </div>
-        @endif
-
-    </div>
     <div class="flex flex-col min-h-screen w-screen relative">
         <div x-data="{ open: false }" class="z-10 fixed inset-x-0 top-0">
             <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
@@ -111,7 +109,7 @@
                     <a href="{{ route('products') }}" class="mx-4">
                         <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Products</p>
                     </a>
-                    <a href="" class="mx-4">
+                    <a href="{{ route('cart') }}" class="mx-4">
                         <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Cart</p>
                     </a>
 
@@ -194,13 +192,13 @@
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
                             {{ __('Cart') }}
                         </x-responsive-nav-link>
                     </div>
                     @auth
                     <div class="py-3 space-y-1 border-b border-gray-300">
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
                     </div>

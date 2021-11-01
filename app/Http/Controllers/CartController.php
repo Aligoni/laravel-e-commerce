@@ -7,13 +7,23 @@ use App\Models\Product;
 use App\Models\Cart;
 use Auth;
 
-class ProductController extends Controller
+class CartController extends Controller
 {
-    //
+    
     public function index() {
-        $products = Product::orderBy('updated_at', 'desc')->get();
-        
-        return view('products.index', [ 'products'=> $products ]);
+        $price = 0;
+        $found = false;
+        $cart_items = Cart::where('user_id', Auth()->user()->id)->get();
+
+        foreach ($cart_items as $item) {
+            $price+= $item->price * $item->quantity;
+        }
+
+        return view('cart.index', [ 
+            'items' => $cart_items, 
+            'found' => $found, 
+            'total_price' => $price 
+        ]);
     }
 
     public function show($id) {
@@ -67,35 +77,6 @@ class ProductController extends Controller
             $cart_item->save();
         }
 
-        return redirect()->back();
-    } 
-    
-    public function removeFromCart($id) {
-        $product = Product::find($id);
-        if (!$product) {
-            return redirect()->route('products');
-        }
-
-        $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
-
-        $found = false;
-
-        foreach ($cart_items as $item) {
-            if ($item->product_id == $id) {
-                $found = true;
-                if ($item->quantity == 1) {
-                    $item->delete();
-                } else {
-                    $item->quantity--;
-                    $item->save();
-                }
-            }
-        }
-
-        if (!$found) {
-            return redirect()->back();
-        }
-
-        return redirect()->back();
+        return redirect('products/'.$id);
     } 
 }

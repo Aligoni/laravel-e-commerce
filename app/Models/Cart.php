@@ -13,7 +13,7 @@ class Cart extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function cart() {
-        return $this->belongsTo('App\Models\Cart');
+    public function product() {
+        return $this->belongsTo('App\Models\Product');
     }
 }
