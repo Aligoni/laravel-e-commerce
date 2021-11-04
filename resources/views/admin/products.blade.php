@@ -173,7 +173,7 @@
     @if (count($products) > 0)
         <div class="flex justify-start w-full flex-wrap">
             @foreach ($products as $item)
-                <div class="admin-product-card shadow-lg">
+                <div class="admin-product-card shadow-lg bg-white">
                     <a href="/admin/products?id={{$item->id}}">
                         <div class="h-48 md:h-60 flex relative">
                             <img src="{{ $item->image }}"
@@ -184,7 +184,7 @@
                             <p class="text-xl">Type: {{$item->type}}</p>
                             <p class="text-xl">Color: {{$item->color}}</p>
                             <p class="text-xl">Size: {{$item->size}}</p>
-                            <p class="text-xl text-blue-600">Price: {{$item->price}}</p>
+                            <p class="text-xl text-blue-600">Price: £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->price)),2)}}</p>
                         </div>
                     </a>
                 </div>

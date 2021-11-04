@@ -8,19 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 
-class MainController extends Controller
+class ProductController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function landingPage()
-    {
-        return view('admin.index');
-    }
 
-    public function products() {
+    public function index() {
 
         $products = Product::orderBy('updated_at', 'desc')->get();
         $add = request('add');
@@ -48,7 +39,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function addProduct(Request $request) {
+    public function store(Request $request) {
         $product = new Product;
         $product->name = $request->name;
         $product->color = $request->color;
@@ -61,7 +52,7 @@ class MainController extends Controller
         return redirect()->route('admin.products');
     }
 
-    public function editProduct (Request $request) {
+    public function update(Request $request) {
         $product = Product::find($request->id);
         if (!$product) {
             return redirect()->route('admin.products');
@@ -78,7 +69,7 @@ class MainController extends Controller
         return redirect()->route('admin.products');
     }
 
-    public function destroyProduct(Request $request) {
+    public function destroy(Request $request) {
         $product = Product::find($request->id);
         if (!$product) {
             return redirect()->route('admin.products');

@@ -21,6 +21,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
+            background: rgb(250, 247, 247);
         }
 
         .app-background {
@@ -78,6 +79,31 @@
 
         .admin-product-card:hover {
             box-shadow: 1px 1px 5px rgb(83, 81, 81);
+        }
+
+        .alert {
+            position: fixed;
+            z-index: 40;
+            top: 50px;
+            left: 0;
+            right: 0;
+            animation: alert-fade 4s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes alert-fade {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
         }
 
         @media screen and (min-width: 600px) {
@@ -174,6 +200,8 @@
         </div>
 
         @yield('content')
+
+        @include('include.feedback')
     </div>
 </body>
 

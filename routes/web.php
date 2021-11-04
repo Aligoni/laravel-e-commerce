@@ -42,9 +42,11 @@ Route::get('/cart/checkout',
     
 Route::post('/cart/checkout', 
     [App\Http\Controllers\CartController::class, 'placeOrder'])->middleware('auth');
+
+Route::get('/admin', function () { return view('admin.index'); })->middleware('admin')->name('admin');
     
 Route::get('/admin/login', 
-    [App\Http\Controllers\Admin\LoginController::class, 'create'])->middleware('admin')->name('admin.login');
+    [App\Http\Controllers\Admin\LoginController::class, 'index'])->middleware('admin')->name('admin.login');
 
 Route::post('/admin/login', 
     [App\Http\Controllers\Admin\LoginController::class, 'store']);
@@ -52,17 +54,20 @@ Route::post('/admin/login',
 Route::post('/admin/logout', 
     [App\Http\Controllers\Admin\LoginController::class, 'destroy'])->middleware('admin')->name('admin.logout');
 
-Route::get('/admin', 
-    [App\Http\Controllers\Admin\MainController::class, 'landingPage'])->middleware('admin')->name('admin');
-
 Route::get('/admin/products', 
-    [App\Http\Controllers\Admin\MainController::class, 'products'])->middleware('admin')->name('admin.products');
+    [App\Http\Controllers\Admin\ProductController::class, 'index'])->middleware('admin')->name('admin.products');
 
 Route::post('/admin/products', 
-    [App\Http\Controllers\Admin\MainController::class, 'addProduct'])->middleware('admin');
+    [App\Http\Controllers\Admin\ProductController::class, 'store'])->middleware('admin');
 
 Route::put('/admin/products', 
-    [App\Http\Controllers\Admin\MainController::class, 'editProduct'])->middleware('admin')->name('admin.products');
+    [App\Http\Controllers\Admin\ProductController::class, 'update'])->middleware('admin')->name('admin.products');
 
 Route::delete('/admin/products', 
-    [App\Http\Controllers\Admin\MainController::class, 'destroyProduct'])->middleware('admin');
+    [App\Http\Controllers\Admin\ProductController::class, 'destroy'])->middleware('admin');
+
+Route::get('/admin/customer', 
+    [App\Http\Controllers\Admin\CustomerController::class, 'index'])->middleware('admin')->name('admin.customer');
+
+Route::get('/admin/customer/{id}', 
+    [App\Http\Controllers\Admin\CustomerController::class, 'show'])->middleware('admin');
