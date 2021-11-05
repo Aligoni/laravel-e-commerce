@@ -39,7 +39,7 @@
             </div>
             @if (count($orders) > 0)
                 @foreach ($orders as $item)
-                    <a href="/profile?id={{$item->id}}"
+                    <a href="/admin/orders/{{$item->id}}"
                         class="hover:bg-gray-100 px-2 py-6 border-b border-gray-300 flex items-center">
                         <div class="flex-1">
                             {{count($item->orderProduct)}} product(s)
@@ -61,8 +61,8 @@
     </div>
     <div class="flex flex-col md:flex-row items-left md:items-center justify-between m-4">
         <p class="text-2xl">
-            Give customer the role. (<span class="text-red-700">
-                User must have not made an order yet or contain items in cart
+            Give customer the Admin role. (<span class="text-red-700">
+                User must have not made an order yet or have items in cart
             </span>)
         </p>
         <form method="POST" action="/admin/customer" class="inline-block">
