@@ -26,10 +26,10 @@ Route::get('/products/{id}',
     [App\Http\Controllers\ProductController::class, 'show'])->middleware('customer');
         
 Route::post('/products/{id}', 
-    [App\Http\Controllers\ProductController::class, 'addToCart'])->middleware(['auth']);
+    [App\Http\Controllers\ProductController::class, 'store'])->middleware(['auth']);
     
 Route::delete('/products/{id}', 
-    [App\Http\Controllers\ProductController::class, 'removeFromCart'])->middleware(['auth']);
+    [App\Http\Controllers\ProductController::class, 'destroy'])->middleware(['auth']);
 
 Route::get('/profile', 
     [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile');

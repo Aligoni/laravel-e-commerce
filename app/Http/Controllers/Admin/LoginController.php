@@ -49,6 +49,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('message', 'Signout Successful');
     }
 }

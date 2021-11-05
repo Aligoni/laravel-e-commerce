@@ -78,6 +78,6 @@ class CartController extends Controller
             $item->delete();
         }
 
-        return redirect()->route('/')->with('message', 'Order Placed Successfully');
+        return redirect()->route('profile')->with('message', 'Order Placed Successfully');
     }
 }

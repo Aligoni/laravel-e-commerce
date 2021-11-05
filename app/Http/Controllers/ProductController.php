@@ -41,7 +41,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function addTocart($id) {
+    public function store($id) {
         $product = Product::find($id);
         if (!$product) {
             return redirect()->route('products')->with('message', 'Product not found');
@@ -70,7 +70,7 @@ class ProductController extends Controller
         return redirect()->back()->with('message', $found ? 'Quantity added successfully' : 'Item added to cart successfully');
     } 
     
-    public function removeFromCart($id) {
+    public function destroy($id) {
         $product = Product::find($id);
         if (!$product) {
             return redirect()->route('products')->with('message', 'Product not found');

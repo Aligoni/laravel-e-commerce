@@ -27,7 +27,7 @@ class ProductController extends Controller
             if ($product) {
                 $edit = 1;
             } else {
-                return redirect()->route('admin.products');
+                return redirect()->route('admin.products')->with('warning', 'Error: Product selected is invalid');
             }
         }
 
@@ -49,13 +49,13 @@ class ProductController extends Controller
         $product->price = $request->price;
 
         $product->save();
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.products')->with('message', 'Product added successfully');
     }
 
     public function update(Request $request) {
         $product = Product::find($request->id);
         if (!$product) {
-            return redirect()->route('admin.products');
+            return redirect()->route('admin.products')->with('warning', 'Error: Invalid product selected');
         }
 
         $product->name = $request->name;
@@ -72,7 +72,7 @@ class ProductController extends Controller
     public function destroy(Request $request) {
         $product = Product::find($request->id);
         if (!$product) {
-            return redirect()->route('admin.products');
+            return redirect()->route('admin.products')->with('warning', 'Error: Product selected is invalid');
         }
 
         $product->delete();
