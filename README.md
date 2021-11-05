@@ -28,6 +28,7 @@ K-Clothing is an online shopping mall where customers can order products at an a
 ## Technical Features
 - Website uses multiple authentication middlewares for both customer and admin.
 - The application is mobile responsive for every page.
+- Application uses MySQL as database.
 - Database uses multiple tables to store user and admin information.
 - There are multiple foreign key constraints on users, products, orders and order_products tables.
 - Website uses sessions to display information and errors.
@@ -88,18 +89,18 @@ You can now access the website at [http://localhost:8000](http://localhost:8000)
 
 - The user/customer is greeted at the landing page. At the top, there is a navigation bar to quickly access and navigate the website. The nav bar shows the authenticated user's name when they are logged in.
 
-<img src="readme images/landing.png" width="49%" >
-<img src="readme images/landing logged in.png" width="49%" >
+<img src="readme images/landing.png" width="99%" >
+<img src="readme images/landing logged in.png" width="99%" >
 
 - The mobile view uses a dropdown menu to show links to pages.
 
-<img src="readme images/landing mobile.png" width="49%" >
-<img src="readme images/mobile logged in.png" width="49%" >
+<img src="readme images/landing mobile.png" width="99%" >
+<img src="readme images/mobile logged in.png" width="99%" >
 
 - The user can either log in or create an account.
 
-<img src="readme images/login page.png" width="49%" >
-<img src="readme images/registration page.png" width="49%" >
+<img src="readme images/login page.png" width="99%" >
+<img src="readme images/registration page.png" width="99%" >
 
 - The user can view the available products in the products page
 
@@ -107,63 +108,63 @@ You can now access the website at [http://localhost:8000](http://localhost:8000)
 
 - The customer can select a specific product and view more details, but the cusotmer will have to be logged in before they can add a product to cart or place an order.
 
-<img src="readme images/product details.png" width="49%" >
-<img src="readme images/add product to cart.png" width="49%" >
+<img src="readme images/product details.png" width="99%" >
+<img src="readme images/add product to cart.png" width="99%" >
 
 - The customer can also add or reduce the quantity of a specific product in the cart.
 
-<img src="readme images/cart mobile.png" width="49%" >
-<img src="readme images/cart mobile add quantity.png" width="49%" >
+<img src="readme images/cart mobile.png" width="99%" >
+<img src="readme images/cart mobile add quantity.png" width="99%" >
 
 - The customer can add different products of different quantities to cart. 
 - After being satisfied with the selection, the customer can proceed to checkout to place an order.
 
-<img src="readme images/cart.png" width="49%" >
-<img src="readme images/cart reduce quantity.png" width="49%" >
+<img src="readme images/cart.png" width="99%" >
+<img src="readme images/cart reduce quantity.png" width="99%" >
 
 - The user can preview their cart to confirm their selection and will have to provide an address for shipping(name and email can't be changed). The total price is also displayed.
 
-<img src="readme images/checkout.png" width="49%" >
-<img src="readme images/cart.png" width="49%" >
+<img src="readme images/checkout.png" width="99%" >
+<img src="readme images/cart.png" width="99%" >
 
 - After the customer confirms the order, they are redirected to the profile page. Here the user can see their details, as well as all of their past orders and order details.
 
-<img src="readme images/order profile.png" width="49%" >
-<img src="readme images/profile order details.png" width="49%" >
+<img src="readme images/order profile.png" width="99%" >
+<img src="readme images/profile order details.png" width="99%" >
 
 - Ofcourse there will be no products if they are not added by the admin. The admin page is located at [http://localhost:8000/admin](http://localhost:8000/admin). This requires authentication and the user is redirected to the login page. The user logs in using the default admin details provided when configuring the website.
 
 - At the admin console, the user can either manage products, customers or orders.
 
 <p align="center">
-<img src="readme images/admin console.png" width="49%" >
+<img src="readme images/admin console.png" width="99%" >
 </p>
 
 - The products page is where the admin can add, edit or remove products from the website. This is reflected at the products page in the customer side.
 
-<img src="readme images/admin add product.png" width="49%" >
-<img src="readme images/admin added product.png" width="49%" >
-<img src="readme images/admin edit product.png" width="49%" >
-<img src="readme images/admin delete product.png" width="49%" >
+<img src="readme images/admin add product.png" width="99%" >
+<img src="readme images/admin added product.png" width="99%" >
+<img src="readme images/admin edit product.png" width="99%" >
+<img src="readme images/admin delete product.png" width="99%" >
 
 - In the orders page, the admin can view all past orders. They can see the customer that ordered and view the details of the order.
 
 <img src="readme images/admin orders.png" width="100%" >
 
-<img src="readme images/admin order details first.png" width="49%" >
-<img src="readme images/admin order details second.png" width="49%" >
+<img src="readme images/admin order details first.png" width="99%" >
+<img src="readme images/admin order details second.png" width="99%" >
 
 - In the customers page, the admin can see the list of all registered users of the website, both admins and customers. By selecting a customer, the admin can view their details as well as their orders 
 
-<img src="readme images/admin user.png" width="49%" >
-<img src="readme images/admin users with order1.png" width="49%" >
-<img src="readme images/admin users with order2.png" width="49%" >
-<img src="readme images/admin users with order to admin role.png" width="49%" >
+<img src="readme images/admin user.png" width="99%" >
+<img src="readme images/admin users with order1.png" width="99%" >
+<img src="readme images/admin users with order2.png" width="99%" >
+<img src="readme images/admin users with order to admin role.png" width="99%" >
 
 - !! If the admin wants to create another admin account, they must first create a normal customer account and then upgrade to admin account. The criteria for upgrade is shown above. 
 
-<img src="readme images/admin users with no order 1.png" width="49%" >
-<img src="readme images/admin users with no order 2.png" width="49%" >
+<img src="readme images/admin users with no order 1.png" width="99%" >
+<img src="readme images/admin users with no order 2.png" width="99%" >
 <img src="readme images/admin users.png" width="99%" >
 
 
