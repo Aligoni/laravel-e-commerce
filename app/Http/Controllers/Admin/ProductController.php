@@ -66,7 +66,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->save();
 
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.products')->with('message', 'Product edited successfully');
     }
 
     public function destroy(Request $request) {
@@ -77,6 +77,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.products')->with('message', 'Product deleted successfully');
     }
 }
