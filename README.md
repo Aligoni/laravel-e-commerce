@@ -1,27 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img src="readme images/app-logo.png" width="400">
 </p>
 
-## About Laravel
+<p align="center">
+Your #1 shopping website!
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## About
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+K-Clothing is an online shopping mall where customers can order products at an affordable price. The customer must be registered before they can buy a product. An admin user can add or delete products from the admin section. The admin can also view all registered users and their orders. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Description and Features
+- The application is built with Laravel framework. 
+- It uses user authentication with different user roles, admin and customer. 
+- Some parts of the website can be viewed without logging in but others require authentication. 
+- Users that register will automatically be given the customer role. 
+- A default admin is created the first time application is installed. 
+- An admin can upgrade a customer to an admin if it satisfies some requirements. 
+- An admin can add, edit and delete products.
+- An admin can also view all orders and customers registered.
+- Customers can view added products and add them to their cart.
+- Customers can add or reduce quantity of products in cart.
+- They can then checkout and place an order of the products in their cart.
+- They can view their profile to see past orders.
 
-## Learning Laravel
+## Technical Features
+- Website uses multiple authentication middlewares for both customer and admin.
+- Database uses multiple tables to store user and admin information.
+- There are multiple foreign key constraints on users, products, orders and order_products tables.
+- Website uses sessions to display information and errors.
+- Website uses tailwind css for majority of the CSS styling.
+- Website makes use of Components for faster development of common elements.
+- Website uses laravel breeze template for initial basic authentication.
+- Website uses table linking between users table and other tables.
+- Website uses table relations for faster quering of related tables.
+- Website makes use of all CRUD Operations.
+
+## Project Installation
+Please check the official laravel installation guide for server requirements before you start.
+
+Clone the repository and cd to the folder.
+
+Install dependencies using [Composer](https://getcomposer.org/)
+
+```
+composer install
+```
+Install javascript dependencies using [npm](https://www.npmjs.com/)
+
+```
+npm install
+```
+Generate the necessary javascript files 
+
+```
+npm run dev
+```
+Copy the example env file and make the required configuration changes in the .env file
+
+```
+cp .env.example .env
+```
+
+Generate a new application key
+
+```
+php artisan key:generate
+```
+
+Run the databse migration (Set the database and admin configurations before migration)
+
+```
+php artisan migrate
+```
+Start the local development serve.
+
+```
+php artisan serve
+```
+You can now access the website at [http://localhost:8000](http://localhost:8000)
+
+
+## Project Usage
+The user is greeted at the landing page.
+
+<img src="readme images/landing.png" width="100%" >
+
+From here the user can view the available products in the products page
+
+<img src="readme images/no products.png" width="100%" >
+
+
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
