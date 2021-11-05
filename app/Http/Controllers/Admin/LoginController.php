@@ -3,80 +3,52 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
 
-class ProductController extends Controller
+class LoginController extends Controller
 {
-
-    public function index() {
-
-        $products = Product::orderBy('updated_at', 'desc')->get();
-        $add = request('add');
-        if ($add != 1) {
-            $add = 0;
-        }
-
-        $productId = request('id');
-        $edit = 0;
-        $product = null;
-        if (isset($productId)) {
-            $product = Product::find($productId);
-            if ($product) {
-                $edit = 1;
-            } else {
-                return redirect()->route('admin.products');
-            }
-        }
-
-        return view ('admin.products', [ 
-            'add' => $add, 
-            'products' => $products, 
-            'product' => $product,
-            'edit' => $edit
-        ]);
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('admin.login');
     }
 
-    public function store(Request $request) {
-        $product = new Product;
-        $product->name = $request->name;
-        $product->color = $request->color;
-        $product->image = $request->image;
-        $product->type = $request->type;
-        $product->size = $request->size;
-        $product->price = $request->price;
+    /**
+     * Handle an incoming authentication request.
+     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(LoginRequest $request)
+    {
+        $request->authenticate();
 
-        $product->save();
-        return redirect()->route('admin.products');
+        $request->session()->regenerate();
+
+        return redirect('admin')->with('message', 'Login Successful');
     }
 
-    public function update(Request $request) {
-        $product = Product::find($request->id);
-        if (!$product) {
-            return redirect()->route('admin.products');
-        }
+    /**
+     * Destroy an authenticated session.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        Auth::guard('web')->logout();
 
-        $product->name = $request->name;
-        $product->color = $request->color;
-        $product->image = $request->image;
-        $product->type = $request->type;
-        $product->size = $request->size;
-        $product->price = $request->price;
-        $product->save();
+        $request->session()->invalidate();
 
-        return redirect()->route('admin.products');
-    }
+        $request->session()->regenerateToken();
 
-    public function destroy(Request $request) {
-        $product = Product::find($request->id);
-        if (!$product) {
-            return redirect()->route('admin.products');
-        }
-
-        $product->delete();
-
-        return redirect()->route('admin.products');
+        return redirect()->route('admin');
     }
 }
