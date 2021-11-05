@@ -57,7 +57,7 @@
                         <div class="mt-4">
                             <x-label for="price" :value="__('Price')" />
                         
-                            <x-input id="price" class="block mt-1 w-full" type="number" min="1" name="price" :value="old('price')" required autofocus />
+                            <x-input id="price" class="block mt-1 w-full" type="number" min="1" step="0.01" name="price" :value="old('price')" required autofocus />
                         </div>
                         <div class="mt-4">
                             <x-label for="image" :value="__('Image Url')" />
@@ -131,7 +131,7 @@
                     <div class="mt-4">
                         <x-label for="price" :value="__('Price')" />
     
-                        <x-input id="price" class="block mt-1 w-full" type="number" min="1" name="price" value="{{$product->price}}"
+                        <x-input id="price" class="block mt-1 w-full" type="number" min="1" step="0.01" name="price" value="{{$product->price}}"
                             required autofocus />
                     </div>
                     <div class="mt-4">

@@ -28,7 +28,7 @@ class CartController extends Controller
         ]);
     }
     
-    public function checkout() {
+    public function show() {
         $price = 0;
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
@@ -46,7 +46,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function placeOrder(Request $request) {
+    public function store(Request $request) {
         $price = 0;
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 

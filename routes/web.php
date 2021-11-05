@@ -38,10 +38,10 @@ Route::get('/cart',
     [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('cart');
 
 Route::get('/cart/checkout', 
-    [App\Http\Controllers\CartController::class, 'checkout'])->middleware('auth')->name('cart.checkout');
+    [App\Http\Controllers\CartController::class, 'show'])->middleware('auth')->name('cart.checkout');
     
 Route::post('/cart/checkout', 
-    [App\Http\Controllers\CartController::class, 'placeOrder'])->middleware('auth');
+    [App\Http\Controllers\CartController::class, 'store'])->middleware('auth');
 
 Route::get('/admin', function () { return view('admin.index'); })->middleware('admin')->name('admin');
     
