@@ -71,3 +71,6 @@ Route::get('/admin/customer',
 
 Route::get('/admin/customer/{id}', 
     [App\Http\Controllers\Admin\CustomerController::class, 'show'])->middleware('admin');
+
+Route::post('/admin/customer', 
+    [App\Http\Controllers\Admin\CustomerController::class, 'update'])->middleware('admin');

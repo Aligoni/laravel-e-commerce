@@ -29,19 +29,45 @@ class CustomerController extends Controller
     public function show($id) {
         $customer = User::find($id);
         if (!$customer) {
-            return redirect()->back()->with('error', 'Invalid user selected');
+            return redirect()->back()->with('warning', 'Invalid user selected');
         }
 
         if ($customer->role == 'ADMIN') {
-            return redirect()->back()->with('error', 'Invalid user selected');
+            return redirect()->back()->with('warning', 'Invalid user selected');
         }
 
-        $orders = $customers->order;
+        $orders = $customer->order;
 
         return view("admin.customer.show", [
             'customer' => $customer,
             'orders' => $orders
         ]);
+    }
+
+    public function update(Request $request) {
+        $id = $request->id;
+        $customer = User::find($id);
+        if (!$customer) {
+            return redirect()->back()->with('warning', 'Invalid user selected');
+        }
+
+        if ($customer->role == 'ADMIN') {
+            return redirect()->back()->with('warning', 'Invalid Customer selected');
+        }
+
+        if (count($customer->cart) > 0) {
+            return redirect()->back()->with('warning', 'Error: Customer has items in cart');
+        }
+
+        if (count($customer->order) > 0) {
+            return redirect()->back()->with('warning', 'Error: Customer has already made an order');
+        }
+
+        $customer->role = 'ADMIN';
+        $customer->save();
+
+        return redirect()->route('admin.customer')->with('message', 'Customer upgraded to Admin role successfully');
+
     }
 
 }

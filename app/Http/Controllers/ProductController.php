@@ -67,7 +67,7 @@ class ProductController extends Controller
             $cart_item->save();
         }
 
-        return redirect()->back()->with('message', 'Item added to cart successfully');
+        return redirect()->back()->with('message', $found ? 'Quantity added successfully' : 'Item added to cart successfully');
     } 
     
     public function removeFromCart($id) {
