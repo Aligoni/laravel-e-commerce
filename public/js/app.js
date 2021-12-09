@@ -4105,9 +4105,12 @@ function DesktopSearchComponent() {
       active = _useState2[0],
       setActive = _useState2[1];
 
+  var inputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
   var searchClicked = function searchClicked() {
     if (!active) {
       setActive(true);
+      inputRef.current && inputRef.current.focus();
     } else {
       setActive(false);
     }
@@ -4117,6 +4120,7 @@ function DesktopSearchComponent() {
     className: "hidden md:flex items-center",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        ref: inputRef,
         type: "text",
         className: "".concat(active ? 'activeInput' : '')
       })

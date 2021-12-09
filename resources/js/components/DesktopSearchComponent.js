@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
 const inputClass = 'w-60 ml-3 transition-transform'
 export default function DesktopSearchComponent() {
     const [active, setActive] = useState(false)
+    const inputRef = useRef(null)
 
     const searchClicked = () => {
         if (!active) {
             setActive(true)
+            inputRef.current && inputRef.current.focus()
+
         } else {
             setActive(false)
         }
@@ -16,7 +19,7 @@ export default function DesktopSearchComponent() {
     return (
         <div className="hidden md:flex items-center">
             <div>
-                <input type="text" className={`${active ? 'activeInput' : ''}`} />
+                <input ref={inputRef} type="text" className={`${active ? 'activeInput' : ''}`} />
             </div>
             {!active ?
                 <i
