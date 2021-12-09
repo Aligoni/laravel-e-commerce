@@ -245,7 +245,7 @@
                     @else
                     <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
-                            person
+                            exit_to_app
                         </i>
                     </a>
                     @endauth
@@ -278,23 +278,47 @@
                     @endauth
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('/')" :active="request()->routeIs('/')">
-                            {{ __('Home') }}
+                            <x-slot name="slot">
+                                <div class="flex items-center">
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        home
+                                    </i>
+                                    <p class="ml-3">Home</p>
+                                </div>
+                            </x-slot>
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                            {{ __('Products') }}
+                            <x-slot name="slot">
+                                <div class="flex items-center">
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        apps
+                                    </i>
+                                    <p class="ml-3">Products</p>
+                                </div>
+                            </x-slot>
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
-                            {{ __('Cart') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    shopping_cart
+                                </i>
+                                <p class="ml-3">Cart</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     @auth
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
-                            {{ __('Profile') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    person
+                                </i>
+                                <p class="ml-3">Profile</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1">
@@ -311,7 +335,12 @@
                     @else
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Login') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    exit_to_app
+                                </i>
+                                <p class="ml-3">Login</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     @endauth
