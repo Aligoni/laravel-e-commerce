@@ -1,22 +1,90 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
-const inputClass = 'w-60 ml-3 transition-transform'
+let axiosHandler
 export default function DesktopSearchComponent() {
+
     const [active, setActive] = useState(false)
+    const [searchText, setSearchText] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [searchResults, setSearchResults] = useState([])
+    const inputRef = useRef(null)
 
     const searchClicked = () => {
         if (!active) {
             setActive(true)
+            inputRef.current && inputRef.current.focus()
+
         } else {
             setActive(false)
+            setSearchText('')
         }
+    }
+
+    const searchTextChange = (e) => {
+        loading && axiosHandler.cancel()
+
+        axiosHandler = axios.CancelToken.source()
+
+        setSearchText(e.target.value)
+        setLoading(true)
+        axios.get(`api/products/search/${e.target.value}`, {
+            cancelToken: axiosHandler.token,
+        }).then(response => {
+            console.log(response)
+            console.log(e.target.value)
+            if (response.status == 200) {
+                setSearchResults(response.data)
+            }
+            setLoading(false)
+        }).catch(function (thrown) {
+            console.log(thrown)
+            if (axios.isCancel(thrown)) {
+                // console.log('cancel for ', e.target.value)
+            } else {
+                // handle error
+            }
+            setLoading(false)
+        });
     }
 
     return (
         <div className="hidden md:flex items-center">
-            <div>
-                <input type="text" className={`${active ? 'activeInput' : ''}`} />
+            <div className="relative">
+                <input
+                    ref={inputRef}
+                    type="text"
+                    placeholder="Start typing..."
+                    className={`${active ? 'activeInput' : ''}`}
+                    value={searchText}
+                    onChange={searchTextChange}
+                />
+                {searchText &&
+                    <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
+                        {loading &&
+                            <div className="loader m-2"></div>
+                        }
+                        {searchResults.length ?
+                            searchResults.map((item, i) =>
+                                <a href={`/products/${item.id}`} key={i} className="w-full flex mx-2 border-t border-gray-200 items-center flex hover:bg-gray-100">
+                                    <div className="relative cart-image flex-1 h-24">
+                                        <img src={item.image} alt="prd_image" />
+                                    </div>
+                                    <div className="flex flex-col items-center justify-center text-center" style={{ flex: 2 }}>
+                                        <p className="text-lg">{item.name}</p>
+                                        <p className="text-lg">{item.type}</p>
+                                        {/* <p className="text-lg">{item.price}</p> */}
+                                    </div>
+                                </a>
+                            ) :
+                            !loading &&
+                            <div className="w-full text-center text-gray-400 text-lg italic border-t border-gray-200 py-2">
+                                Sorry, item not found :(
+                            </div>
+                        }
+                    </div>
+                }
             </div>
             {!active ?
                 <i
