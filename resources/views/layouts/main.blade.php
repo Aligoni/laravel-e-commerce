@@ -16,7 +16,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -177,12 +176,12 @@
             <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
                 <a href="/"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
                 <nav class="flex justify-evenly items-center">
-                    <a href="{{ route('products') }}" class="mx-4">
+                    <a href="{{ route('products') }}" class="hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             apps
                         </i>
                     </a>
-                    <a href="{{ route('cart') }}" class="mx-4">
+                    <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             shopping_cart
                         </i>
