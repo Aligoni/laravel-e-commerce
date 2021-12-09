@@ -35,13 +35,34 @@
             background-position: center;
         }
 
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
         .mobile-dropdown {
             max-height: 0;
             transition: max-height 0.5s ease-in-out;
         }
 
         .animate {
-            max-height: 30rem;
+            max-height: 35rem;
         }
 
         .product-card {
@@ -266,7 +287,7 @@
                 </nav>
             </div>
             <div :class="{'animate': open}"
-                class="block overflow-hidden mobile-dropdown sm:hidden bg-white">
+                class="block overflow-hidden mobile-dropdown shadow-md sm:hidden bg-white">
 
                 <!-- Responsive Settings Options -->
                 <div class="border-t border-gray-200">
@@ -301,6 +322,10 @@
                             </x-slot>
                         </x-responsive-nav-link>
                     </div>
+
+                    {{-- React Component "MobileSearchComponent" --}}
+                    <div id="mobileSearch"></div>
+
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
                             <div class="flex items-center">
