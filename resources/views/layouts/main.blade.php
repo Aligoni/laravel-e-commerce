@@ -11,8 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     {{-- Bootstrap Icons --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -114,6 +115,20 @@
             overflow-y: scroll;
         }
 
+        #desktopSearch input {
+            border: none;
+            padding: 0;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        #desktopSearch .activeInput {
+            width: 15rem;
+            border: 1px solid black;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
         .alert {
             position: fixed;
             z-index: 40;
@@ -161,14 +176,21 @@
         <div x-data="{ open: false }" class="z-10 fixed inset-x-0 top-0">
             <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
                 <a href="/"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
-                <nav class="flex justify-evenly">
+                <nav class="flex justify-evenly items-center">
                     <a href="{{ route('products') }}" class="mx-4">
-                        <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Products</p>
+                        <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                            apps
+                        </i>
                     </a>
                     <a href="{{ route('cart') }}" class="mx-4">
-                        <p class="hidden md:inline text-xl text-gray-700 font-bold hover:text-blue-500">Cart</p>
+                        <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                            shopping_cart
+                        </i>
                     </a>
-
+                
+                    {{-- React component 'DesktopSearchComponent' --}}
+                    <div id="desktopSearch"></div>
+                    
                     <!-- Hamburger -->
                     @auth
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -176,7 +198,9 @@
                             <x-slot name="trigger">
                                 <button
                                     class="flex items-center text-xl text-gray-700 font-bold hover:text-blue-500 hover:border-blue-300 focus:outline-none focus:text-blue-700 focus:border-blue-300">
-                                    <div>{{ Auth::user()->name }}</div>
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        person
+                                    </i>
 
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -207,7 +231,9 @@
                     </div>
                     @else
                     <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
-                        <p class="text-xl text-gray-700 font-bold hover:text-blue-500">Login</p>
+                        <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                            person
+                        </i>
                     </a>
                     @endauth
                     <div class="-mr-2 flex items-center sm:hidden">

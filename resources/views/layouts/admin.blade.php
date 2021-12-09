@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     {{-- Bootstrap Icons --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
