@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class AddIndexToProductsTable extends Migration
+class AddFullTextIndexToProducts extends Migration
 {
     /**
      * Run the migrations.
