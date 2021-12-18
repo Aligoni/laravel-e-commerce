@@ -60,7 +60,7 @@
         .modal-content {
             width: 90vw;
             max-height: 90vh;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         .admin-product-card {
