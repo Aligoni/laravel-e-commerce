@@ -85,3 +85,7 @@ Route::get('/admin/orders/{id}',
 Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 
 Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+
+Route::get('auth/github', [SocialController::class, 'gitRedirect']);
+
+Route::get('auth/github/callback', [SocialController::class, 'gitCallback']);
