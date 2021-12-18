@@ -13,7 +13,7 @@
                     <div class="product-card  shadow-lg">
                         <a href="/products/{{$item->id}}">
                             <div class="h-48 md:h-60 flex relative">
-                                <img src="{{$item->image}}" alt="product image">
+                                <img src="/storage/products_images/{{$item->image}}" alt="product image">
                             </div>
                             <div class="p-2">
                                 <p class="text-2xl text-blue-600">{{$item->name}}</p>

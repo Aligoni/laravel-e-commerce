@@ -24,13 +24,13 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     
-                    <form method="POST" action="/admin/products">
+                    <form method="POST" action="/admin/products" enctype="multipart/form-data">
                         @csrf
                         <div class="mt-4 flex w-full">
                             <div class="flex-1 pr-2">
                                 <x-label for="name" :value="__('Name')" />
                         
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('neme')" required
+                                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                                     autofocus />
                             </div>
                             <div class="flex-1 pl-2">
@@ -60,9 +60,11 @@
                             <x-input id="price" class="block mt-1 w-full" type="number" min="1" step="0.01" name="price" :value="old('price')" required autofocus />
                         </div>
                         <div class="mt-4">
-                            <x-label for="image" :value="__('Image Url')" />
+                            <x-label for="product_image" :value="__('Product Image')" />
+                            
+                            <input class="mt-1" type="file" name="product_image" id="product_image" required>
                         
-                            <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="old('image')" required autofocus />
+                            {{-- <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="old('image')" required autofocus /> --}}
                         </div>
                     
                         <div class="flex items-center justify-end mt-4">
@@ -97,7 +99,7 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
     
-                <form class="inline" method="POST" action="/admin/products">
+                <form class="inline" method="POST" action="/admin/products" enctype="multipart/form-data">
                     @csrf
                     
                     <input type="hidden" id="id" name="id" value="{{$product->id}}">
@@ -135,10 +137,10 @@
                             required autofocus />
                     </div>
                     <div class="mt-4">
-                        <x-label for="image" :value="__('Image Url')" />
+                        <x-label for="product_image" :value="__('Reupload to replace current product image if required')" />
+                        
+                        <input class="mt-1" type="file" name="product_image" id="product_image" >
     
-                        <x-input id="image" class="block mt-1 w-full" type="text" name="image" value="{{$product->image}}"
-                            required autofocus />
                     </div>
     
                     <div class="inline-block">
@@ -176,7 +178,7 @@
                 <div class="admin-product-card shadow-lg bg-white">
                     <a href="/admin/products?id={{$item->id}}">
                         <div class="h-48 md:h-60 flex relative">
-                            <img src="{{ $item->image }}"
+                            <img src="/storage/products_images/{{ $item->image }}"
                                 alt="product image">
                         </div>
                         <div class="p-2">
