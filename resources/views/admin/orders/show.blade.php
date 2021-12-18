@@ -42,7 +42,7 @@
                     @foreach ($order->orderProduct as $item)
                     <div class="p-2 border-b border-gray-300 flex items-center">
                         <div class="cart-image flex-1 h-32 relative">
-                            <img src="{{ $item->image }}" alt="product image">
+                            <img src="/storage/products_images/{{ $item->image }}" alt="product image">
                         </div>
                         <div class="flex-1 text-center">
                             {{$item->quantity}}

@@ -11,7 +11,7 @@
             <div class="flex flex-col md:hidden bg-white my-4 shadow-lg">
                 <div class="flex items-center p-4">
                     <a href='products/{{$item->product_id}}' class="cart-image flex-1 h-40 relative ">
-                        <img src="{{ $item->product->image }}" alt="product image">
+                        <img src="/storage/products_images/{{ $item->product->image }}" alt="product image">
                     </a>
                     <div class="flex-1 m-4">
                         <div class="text-xl text-red-700">
@@ -54,7 +54,7 @@
             </div>
             <div class="hidden md:flex m-6 bg-white shadow-lg p-4 justify-between items-center">
                 <a href='products/{{$item->product_id}}' class="cart-image flex-1 h-40 relative ">
-                    <img src="{{ $item->product->image }}" alt="product image">
+                    <img src="/storage/products_images/{{ $item->product->image }}" alt="product image">
                 </a>
                 <div class="flex-1 text-center text-lg border-l border-gray-400">
                     {{$item->product->type}}
