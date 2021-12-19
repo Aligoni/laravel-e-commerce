@@ -47,14 +47,6 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-
-            {{-- Login with Facebook --}}
-            <div class="flex items-center justify-end mt-4">
-                <a class="btn" href="{{ url('auth/facebook') }}"
-                    style="background: #3B5499; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
-                    Login with Facebook
-                </a>
-            </div>
             
             <div class="flex items-center justify-end mt-4">
                 {{-- @if (Route::has('password.request'))
@@ -64,11 +56,32 @@
                 @endif --}}
 
                 <a href="/register" class="mx-4">
-                    {{ __('Register') }}
+                    {{ __('No account? Register') }}
                 </a>
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
+            </div>
+
+            <div class="flex items-center mt-4">
+                <div class="h-1 flex-1 border-t border-gray-300"></div>
+                <p class="text-gray-500 mx-4">OR</p>
+                <div class="h-1 flex-1 border-t border-gray-300"></div>
+            </div>
+            {{-- Login with Facebook --}}
+            <div class="flex items-center justify-end mt-4">
+                <a class="btn" href="{{ url('auth/facebook') }}"
+                    style="background: #3B5499; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                    Login with Facebook
+                </a>
+            </div>
+
+            {{-- Login with GitHub --}}
+            <div class="flex items-center justify-end mt-4">
+                <a class="btn" href="{{ url('auth/github') }}"
+                    style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                    Login with GitHub
+                </a>
             </div>
         </form>
     </x-auth-card>
