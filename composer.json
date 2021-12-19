@@ -15,6 +15,7 @@
         "laravel/ui": "^3.4"
     },
     "require-dev": {
+        "brianium/paratest": "^6.4",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.4",
