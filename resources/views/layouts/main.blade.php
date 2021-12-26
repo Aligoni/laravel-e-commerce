@@ -217,11 +217,14 @@
                             apps
                         </i>
                     </a>
-                    <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
+                    {{-- <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             shopping_cart
                         </i>
-                    </a>
+                    </a> --}}
+
+                    {{-- React Component 'DesktopCartComponent' --}}
+                    <div id="desktopCart"></div>
                 
                     {{-- React component 'DesktopSearchComponent' --}}
                     <div id="desktopSearch"></div>
