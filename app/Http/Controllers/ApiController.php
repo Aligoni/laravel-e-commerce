@@ -21,4 +21,9 @@ class ApiController extends Controller
         $products = Product::whereRaw("MATCH(size, type, color, name) AGAINST(?)", array($text))->get();
         return response()->json($products);
     }
+
+    public function getUserCart ($id) {
+        $cart_items = Cart::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
+        return response()->json($cart_items);
+    }
 }

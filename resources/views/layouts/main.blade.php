@@ -224,7 +224,11 @@
                     </a> --}}
 
                     {{-- React Component 'DesktopCartComponent' --}}
-                    <div id="desktopCart"></div>
+                    @auth
+                        <div id="desktopCart" data-id="{{Auth::user()->id}}"></div>
+                    @else    
+                        <div id="desktopCart" ></div>
+                    @endauth
                 
                     {{-- React component 'DesktopSearchComponent' --}}
                     <div id="desktopSearch"></div>
