@@ -217,11 +217,18 @@
                             apps
                         </i>
                     </a>
-                    <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
+                    {{-- <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             shopping_cart
                         </i>
-                    </a>
+                    </a> --}}
+
+                    {{-- React Component 'DesktopCartComponent' --}}
+                    @auth
+                        <div id="desktopCart" data-id="{{Auth::user()->id}}"></div>
+                    @else    
+                        <div id="desktopCart" ></div>
+                    @endauth
                 
                     {{-- React component 'DesktopSearchComponent' --}}
                     <div id="desktopSearch"></div>

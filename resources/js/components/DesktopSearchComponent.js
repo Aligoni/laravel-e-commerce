@@ -29,7 +29,7 @@ export default function DesktopSearchComponent() {
 
         setSearchText(e.target.value)
         setLoading(true)
-        axios.get(`api/products/search/${e.target.value}`, {
+        axios.get(`/api/products/search/${e.target.value}`, {
             cancelToken: axiosHandler.token,
         }).then(response => {
             console.log(response)
