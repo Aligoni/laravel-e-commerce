@@ -6,6 +6,13 @@
             </a>
         </x-slot>
 
+        <div class='text-center mb-12 mt-8 flex justify-center'>
+            <a href="/" class='inline text-center mx-auto'>
+                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
+                <img src="/images/app-logo.png" alt="" class="w-38 h-16">
+            </a>
+        </div>
+        
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>

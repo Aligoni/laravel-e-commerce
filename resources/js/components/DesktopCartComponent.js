@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 export default function DesktopCartComponent (props) {
-    const [cartItems, setCartItems] = useState(0)
+    const [cartItems, setCartItems] = useState('')
 
     useEffect(() => {
         console.log(props)
@@ -11,7 +11,7 @@ export default function DesktopCartComponent (props) {
             axios.get(`/api/cart/${props.id}`)
             .then(response => {
                 console.log(response)
-                setCartItems(response.data.length)
+                setCartItems(response.data.length +'')
             }).catch(function (thrown) {
                 console.log(thrown)
             });
