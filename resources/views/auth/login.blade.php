@@ -48,6 +48,13 @@
                 </label>
             </div>
             
+            {{-- Forgot Password --}}
+            <div class="mt-4">
+                <a href="/forgot-password" class="hover:underline">
+                    {{ __('Forgot password? Click here') }}
+                </a>
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 {{-- @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
@@ -55,7 +62,7 @@
                     </a>
                 @endif --}}
 
-                <a href="/register" class="mx-4">
+                <a href="/register" class="mx-4 hover:underline">
                     {{ __('No account? Register') }}
                 </a>
                 <x-button class="ml-3">
