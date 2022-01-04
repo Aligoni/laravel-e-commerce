@@ -24,11 +24,11 @@ class ProductController extends Controller
     public function show($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products')->with('message', 'Product not found');
+            return redirect()->route('products')->with('warning', 'Product not found');
         }
 
         if ($product->out_of_stock == 1) {
-            return redirect()->route('products')->with('message', 'Product is out of stock');
+            return redirect()->route('products')->with('warning', 'Product is out of stock');
         }
 
         $quantity = 0;
@@ -53,7 +53,11 @@ class ProductController extends Controller
     public function store($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products')->with('message', 'Product not found');
+            return redirect()->route('products')->with('warning', 'Product not found');
+        }
+
+        if ($product->out_of_stock == 1) {
+            return redirect()->route('products')->with('warning', 'Product is out of stock');
         }
 
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
@@ -82,7 +86,7 @@ class ProductController extends Controller
     public function destroy($id) {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->route('products')->with('message', 'Product not found');
+            return redirect()->route('products')->with('warning', 'Product not found');
         }
 
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
