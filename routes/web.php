@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +81,11 @@ Route::get('/admin/orders',
 
 Route::get('/admin/orders/{id}', 
     [App\Http\Controllers\Admin\OrderController::class, 'show'])->middleware('admin');
+
+Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
+
+Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+
+Route::get('auth/github', [SocialController::class, 'gitRedirect']);
+
+Route::get('auth/github/callback', [SocialController::class, 'gitCallback']);

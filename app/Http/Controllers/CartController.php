@@ -17,8 +17,17 @@ class CartController extends Controller
         $found = false;
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
+        $cartUpdated = false;
         foreach ($cart_items as $item) {
             $price += $item->product->price * $item->quantity;
+            if ($item->product->out_of_stock == 1) {
+                $item->delete();
+                $cartUpdated = true;
+            }
+        }
+
+        if ($cartUpdated) {
+            return redirect()->route('cart')->with('message', 'Your cart has been updated');
         }
 
         return view('cart.index', [ 
@@ -32,8 +41,17 @@ class CartController extends Controller
         $price = 0;
         $cart_items = Cart::where('user_id', Auth()->user()->id)->orderBy('updated_at', 'desc')->get();
 
+        $cartUpdated = false;
         foreach ($cart_items as $item) {
             $price += $item->product->price * $item->quantity;
+            if ($item->product->out_of_stock == 1) {
+                $item->delete();
+                $cartUpdated = true;
+            }
+        }
+
+        if ($cartUpdated) {
+            return redirect()->route('cart')->with('message', 'Your cart has been updated');
         }
 
         if ($price == 0) {

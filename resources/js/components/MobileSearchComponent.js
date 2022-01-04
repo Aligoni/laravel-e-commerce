@@ -3,24 +3,20 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 let axiosHandler
-export default function DesktopSearchComponent() {
-
-    const [active, setActive] = useState(false)
+export default function MobileSearchComponent() {
+    const [showSearch, setShowSearch] = useState(false)
     const [searchText, setSearchText] = useState('')
     const [loading, setLoading] = useState(false)
     const [searchResults, setSearchResults] = useState([])
     const inputRef = useRef(null)
 
-    const searchClicked = () => {
-        if (!active) {
-            setActive(true)
+    useEffect(() => {
+        if (showSearch) {
             inputRef.current && inputRef.current.focus()
-
         } else {
-            setActive(false)
             setSearchText('')
         }
-    }
+    }, [showSearch])
 
     const searchTextChange = (e) => {
         loading && axiosHandler.cancel()
@@ -50,18 +46,39 @@ export default function DesktopSearchComponent() {
     }
 
     return (
-        <div className="hidden md:flex items-center">
-            <div className="relative">
-                <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder="Start typing..."
-                    className={`${active ? 'activeInput' : ''}`}
-                    value={searchText}
-                    onChange={searchTextChange}
-                />
+        <div className="md:hidden py-3 pl-4 space-y-1 border-b border-gray-300">
+            <div onClick={() => setShowSearch(true)} className="cursor-pointer hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out text-base font-medium text-gray-600 flex items-center">
+                <i className="material-icons hover:text-blue-500" style={{ fontSize: 36 }}>
+                    search
+                </i>
+                <p className="ml-3">Search Products</p>
+            </div>
+            {showSearch && <div className="fixed z-30 top-0 right-0 left-0 bottom-0 bg-white">
+                <div className="flex items-center p-4">
+                    <div className="relative cart-image flex-1 h-24">
+                        <img src="/images/app-logo.png" alt="app-logo" />
+                    </div>
+                </div>
+
+                <div className="text-xl italic mx-8 mt-2">
+                    Search for products
+                </div>
+                <div className="flex items-center my-2 mx-8">
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        placeholder="Start typing..."
+                        className="flex-1 rounded"
+                        value={searchText}
+                        onChange={searchTextChange}
+                    />
+                    <div onClick={() => setShowSearch(false)} className="ml-4 p-2 cursor-pointer text-2xl mx-2 text-gray-700 font-bold hover:text-blue-500">
+                        X
+                    </div>
+                </div>
+
                 {searchText &&
-                    <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
+                    <div className="mt-2 mx-8 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
                         {loading &&
                             <div className="loader m-2"></div>
                         }
@@ -85,24 +102,11 @@ export default function DesktopSearchComponent() {
                         }
                     </div>
                 }
-            </div>
-            {!active ?
-                <i
-                    onClick={searchClicked}
-                    className="cursor-pointer material-icons ml-2 hover:text-blue-500"
-                    style={{ fontSize: 36 }}>
-                    search
-                </i> :
-                <p
-                    onClick={searchClicked}
-                    className="cursor-pointer text-2xl mx-2 text-gray-700 font-bold hover:text-blue-500">
-                    X
-                </p>
-            }
+            </div>}
         </div>
     )
 }
 
-if (document.getElementById('desktopSearch')) {
-    ReactDOM.render(<DesktopSearchComponent />, document.getElementById('desktopSearch'));
+if (document.getElementById('mobileSearch')) {
+    ReactDOM.render(<MobileSearchComponent />, document.getElementById('mobileSearch'));
 }

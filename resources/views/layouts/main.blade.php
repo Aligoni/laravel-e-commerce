@@ -35,12 +35,34 @@
             background-position: center;
         }
 
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
         .mobile-dropdown {
-            height: 0;
+            max-height: 0;
+            transition: max-height 0.5s ease-in-out;
         }
 
         .animate {
-            height: 100%;
+            max-height: 35rem;
         }
 
         .product-card {
@@ -111,7 +133,7 @@
         .modal-content {
             width: 90vw;
             max-height: 90vh;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         #desktopSearch input {
@@ -195,11 +217,18 @@
                             apps
                         </i>
                     </a>
-                    <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
+                    {{-- <a href="{{ route('cart') }}" class="hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             shopping_cart
                         </i>
-                    </a>
+                    </a> --}}
+
+                    {{-- React Component 'DesktopCartComponent' --}}
+                    @auth
+                        <div id="desktopCart" data-id="{{Auth::user()->id}}"></div>
+                    @else    
+                        <div id="desktopCart" ></div>
+                    @endauth
                 
                     {{-- React component 'DesktopSearchComponent' --}}
                     <div id="desktopSearch"></div>
@@ -245,7 +274,7 @@
                     @else
                     <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
-                            person
+                            exit_to_app
                         </i>
                     </a>
                     @endauth
@@ -264,8 +293,8 @@
                     </div>
                 </nav>
             </div>
-            <div :class="{'block': open, 'hidden': ! open, 'animate': open}"
-                class="hidden mobile-dropdown sm:hidden bg-white">
+            <div :class="{'animate': open}"
+                class="block overflow-hidden mobile-dropdown shadow-md sm:hidden bg-white">
 
                 <!-- Responsive Settings Options -->
                 <div class="border-t border-gray-200">
@@ -278,23 +307,51 @@
                     @endauth
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('/')" :active="request()->routeIs('/')">
-                            {{ __('Home') }}
+                            <x-slot name="slot">
+                                <div class="flex items-center">
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        home
+                                    </i>
+                                    <p class="ml-3">Home</p>
+                                </div>
+                            </x-slot>
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                            {{ __('Products') }}
+                            <x-slot name="slot">
+                                <div class="flex items-center">
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        apps
+                                    </i>
+                                    <p class="ml-3">Products</p>
+                                </div>
+                            </x-slot>
                         </x-responsive-nav-link>
                     </div>
+
+                    {{-- React Component "MobileSearchComponent" --}}
+                    <div id="mobileSearch"></div>
+
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
-                            {{ __('Cart') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    shopping_cart
+                                </i>
+                                <p class="ml-3">Cart</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     @auth
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
-                            {{ __('Profile') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    person
+                                </i>
+                                <p class="ml-3">Profile</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     <div class="py-3 space-y-1">
@@ -304,14 +361,24 @@
 
                             <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                <div class="flex items-center">
+                                    <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                        exit_to_app
+                                    </i>
+                                    <p class="ml-3">Logout</p>
+                                </div>
                             </x-responsive-nav-link>
                         </form>
                     </div>
                     @else
                     <div class="py-3 space-y-1 border-b border-gray-300">
                         <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Login') }}
+                            <div class="flex items-center">
+                                <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
+                                    exit_to_app
+                                </i>
+                                <p class="ml-3">Login</p>
+                            </div>
                         </x-responsive-nav-link>
                     </div>
                     @endauth

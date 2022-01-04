@@ -12,7 +12,7 @@
 
         <div class="flex md:flex-1 md:items-center flex-col md:flex-row w-full md:mx-10 mt-8 md:mt-1">
             <div class="md:flex-1 single-card relative" style="background: initial">
-                <img src="{{$product->image}}" alt="product image">
+                <img src="/storage/products_images/{{$product->image}}" alt="product image">
             </div>
             <div class="md:flex-1 py-5 px-4">
                 <div class="md:pr-52">
