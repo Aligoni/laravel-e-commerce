@@ -110,6 +110,7 @@ class ProductController extends Controller
         $product->type = $request->type;
         $product->size = $request->size;
         $product->price = $request->price;
+        $product->out_of_stock = $request->stock;
         $product->save();
 
         return redirect()->route('admin.products')->with('message', 'Product edited successfully');

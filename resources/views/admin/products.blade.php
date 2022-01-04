@@ -130,11 +130,26 @@
                             <x-input id="type" class="block mt-1 w-full" type="text" name="type" value="{{$product->type}}" required autofocus />
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <x-label for="price" :value="__('Price')" />
-    
-                        <x-input id="price" class="block mt-1 w-full" type="number" min="1" step="0.01" name="price" value="{{$product->price}}"
-                            required autofocus />
+                    <div class="mt-4 flex w-full">
+                        <div class="flex-1 pr-2">
+                            <x-label for="price" :value="__('Price')" />
+        
+                            <x-input id="price" class="block mt-1 w-full" type="number" min="1" step="0.01" name="price" value="{{$product->price}}"
+                                required autofocus />
+                        </div>
+                        <div class="flex-1 pl-2">
+                            <x-label for="stock" :value="__('Out Of Stock')" />
+
+                            <select name="stock" id="stock" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
+                                @if ($product->out_of_stock == 0)
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                @else
+                                    <option value="0">No</option>
+                                    <option value="1" selected>Yes</option>
+                                @endif
+                            </select>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <x-label for="product_image" :value="__('Reupload to replace current product image if required')" />
@@ -187,6 +202,9 @@
                             <p class="text-xl">Color: {{$item->color}}</p>
                             <p class="text-xl">Size: {{$item->size}}</p>
                             <p class="text-xl text-blue-600">Price: £{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->price)),2)}}</p>
+                            <p class="text-xl">Out of Stock: 
+                                <span class="font-bold {{$item->out_of_stock == 1 ? "text-red-500" : "text-green-500" }}">{{$item->out_of_stock == 1 ? "Yes" : "No" }}</span>
+                            </p>
                         </div>
                     </a>
                 </div>
