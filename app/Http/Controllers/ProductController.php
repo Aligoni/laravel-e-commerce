@@ -11,7 +11,13 @@ class ProductController extends Controller
 {
     //
     public function index() {
-        $products = Product::orderBy('updated_at', 'desc')->get();
+        // $products = Product::orderBy('updated_at', 'desc')->get();
+
+        // caching products for 5 seconds to improve performance
+        $products = cache()->remember("all-products", 5, function () {
+            var_dump('testing');
+            return Product::orderBy('updated_at', 'desc')->get();
+        });
         
         return view('products.index', [ 'products'=> $products ]);
     }
