@@ -21,9 +21,11 @@
                                 <p class="text-xl">£{{number_format(sprintf('%0.2f', preg_replace("/[^0-9.]/", "", $item->price)),2)}}</p>
                             </div>
                         </a>
-                        <div class="absolute right-0 left-0 top-0 bottom-0 bg-opacity-50 bg-gray-100 flex items-center justify-center">
-                            <p class="text-2xl md:text-4xl text-center text-red-500 transform -rotate-45 font-bold">Out of Stock</p>
-                        </div>
+                        @if ($item->out_of_stock == 1)
+                            <div class="absolute right-0 left-0 top-0 bottom-0 bg-opacity-50 bg-gray-100 flex items-center justify-center">
+                                <p class="text-2xl md:text-4xl text-center text-red-500 transform -rotate-45 font-bold">Out of Stock</p>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
