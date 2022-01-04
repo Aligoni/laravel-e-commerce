@@ -27,6 +27,10 @@ class ProductController extends Controller
             return redirect()->route('products')->with('message', 'Product not found');
         }
 
+        if ($product->out_of_stock == 1) {
+            return redirect()->route('products')->with('message', 'Product is out of stock');
+        }
+
         $quantity = 0;
         $found = false;
         if (Auth::check()) {
