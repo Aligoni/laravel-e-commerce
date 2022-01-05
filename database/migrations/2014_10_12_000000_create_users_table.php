@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('role')->default('CUSTOMER');
@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
 
         DB::table('users')->insert(
             array(
+                'id' => Str::uuid()->toString(),
                 'name' => env('ADMIN_NAME', 'Admin User'),
                 'email' => env('ADMIN_EMAIL', 'admin@gmail.com'),
                 'password' => Hash::make(env('ADMIN_PASSWORD', 'mastersuite')),
