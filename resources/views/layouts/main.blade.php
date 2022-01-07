@@ -235,11 +235,11 @@
                     
                     <!-- Hamburger -->
                     @auth
-                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <div class="{{request()->routeIs('profile') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="flex items-center text-xl text-gray-700 font-bold hover:text-blue-500 hover:border-blue-300 focus:outline-none focus:text-blue-700 focus:border-blue-300">
+                                    class="{{request()->routeIs('profile') ? 'text-blue-500' : 'text-gray-700'}} flex items-center text-xl font-bold hover:text-blue-500 hover:border-blue-300 focus:outline-none focus:text-blue-700 focus:border-blue-300">
                                     <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                                         person
                                     </i>
