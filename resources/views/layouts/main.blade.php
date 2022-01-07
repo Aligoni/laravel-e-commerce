@@ -72,15 +72,24 @@
             border-radius: 0.25rem;
         }
         
+        .product-card:hover {
+            box-shadow: 1px 1px 5px rgb(83, 81, 81);
+        }
+
         .product-card img {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(1);
             width: auto;
             height: auto;
             max-height: 100%;
             max-width: 100%;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .product-card:hover img {
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .cart-image {
@@ -95,9 +104,6 @@
             height: auto;
             max-height: 100%;
             max-width: 100%;
-        }
-        .product-card:hover {
-            box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
         .single-card {
@@ -114,6 +120,11 @@
             height: auto;
             max-height: 100%;
             max-width: 100%;
+            transition: ease-in-out 0.5s all;
+        }
+
+        .single-card img:hover {
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
         .modal {

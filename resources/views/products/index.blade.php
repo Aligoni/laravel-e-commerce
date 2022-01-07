@@ -12,7 +12,7 @@
                 @foreach ($products as $item)
                     <div class="product-card shadow-lg relative">
                         <a href="/products/{{$item->id}}">
-                            <div class="h-48 md:h-60 flex relative">
+                            <div class="h-48 md:h-60 flex relative overflow-hidden">
                                 <img src="/storage/products_images/{{$item->image}}" alt="product image">
                             </div>
                             <div class="p-2">
@@ -22,7 +22,7 @@
                             </div>
                         </a>
                         @if ($item->out_of_stock == 1)
-                            <div class="absolute right-0 left-0 top-0 bottom-0 bg-opacity-50 bg-gray-100 flex items-center justify-center">
+                            <div class="absolute right-0 left-0 top-0 bottom-0 bg-opacity-50 bg-gray-100 flex items-center justify-center cursor-default">
                                 <p class="text-2xl md:text-4xl text-center text-red-500 transform -rotate-45 font-bold">Out of Stock</p>
                             </div>
                         @endif
