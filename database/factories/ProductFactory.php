@@ -21,13 +21,18 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        // randomise out of stock status
+        $options = array(0, 1);
+
         return [
             'name' => $this->faker->words(3, true),
             'color' => $this->faker->word(),
             'type' => $this->faker->word(),
             'size' => $this->faker->word(),
             'price' => $this->faker->randomFloat(2,1,100),
-            'image' => $this->faker->image('\temp', $width=400, $height=600),
+            // use default image provided
+            'image' => '../../images/seed-image.jpg',
+            'out_of_stock' => $options[array_rand($options)]
         ];
     }
 }
