@@ -72,15 +72,24 @@
             border-radius: 0.25rem;
         }
         
+        .product-card:hover {
+            box-shadow: 1px 1px 5px rgb(83, 81, 81);
+        }
+
         .product-card img {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(1);
             width: auto;
             height: auto;
             max-height: 100%;
             max-width: 100%;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .product-card:hover img {
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .cart-image {
@@ -95,9 +104,6 @@
             height: auto;
             max-height: 100%;
             max-width: 100%;
-        }
-        .product-card:hover {
-            box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
         .single-card {
@@ -114,6 +120,11 @@
             height: auto;
             max-height: 100%;
             max-width: 100%;
+            transition: ease-in-out 0.5s all;
+        }
+
+        .single-card img:hover {
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
         .modal {
@@ -209,10 +220,10 @@
 <body class="antialiased">
     <div class="flex flex-col min-h-screen w-screen relative">
         <div x-data="{ open: false }" class="z-10 fixed inset-x-0 top-0">
-            <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
+            <div class="flex justify-between px-8 md:px-20 items-center bg-white shadow-md">
                 <a href="/"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
-                <nav class="flex justify-evenly items-center">
-                    <a href="{{ route('products') }}" class="hidden md:inline mx-4">
+                <nav class="flex justify-evenly items-stretch">
+                    <a href="{{ route('products') }}" class="{{request()->routeIs('products') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 pt-3 pb-2 hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             apps
                         </i>
@@ -225,21 +236,21 @@
 
                     {{-- React Component 'DesktopCartComponent' --}}
                     @auth
-                        <div id="desktopCart" data-id="{{Auth::user()->id}}"></div>
+                        <div id="desktopCart" data-id="{{Auth::user()->id}}" class="{{request()->routeIs('cart') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 pt-3 pb-2 flex"></div>
                     @else    
-                        <div id="desktopCart" ></div>
+                        <div id="desktopCart" class="border-white border-b-4 pt-3 pb-2 flex"></div>
                     @endauth
                 
                     {{-- React component 'DesktopSearchComponent' --}}
-                    <div id="desktopSearch"></div>
+                    <div id="desktopSearch" class="flex"></div>
                     
                     <!-- Hamburger -->
                     @auth
-                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <div class="{{request()->routeIs('profile') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="flex items-center text-xl text-gray-700 font-bold hover:text-blue-500 hover:border-blue-300 focus:outline-none focus:text-blue-700 focus:border-blue-300">
+                                    class="{{request()->routeIs('profile') ? 'text-blue-500' : 'text-gray-700'}} flex items-center text-xl font-bold hover:text-blue-500 hover:border-blue-300 focus:outline-none focus:text-blue-700 focus:border-blue-300">
                                     <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                                         person
                                     </i>
@@ -272,7 +283,7 @@
                         </x-dropdown>
                     </div>
                     @else
-                    <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
+                    <a href="{{ route('login') }}" class="border-white border-b-4 pt-3 pb-2 mx-4 hidden sm:inline">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             exit_to_app
                         </i>
