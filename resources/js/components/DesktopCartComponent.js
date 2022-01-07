@@ -20,7 +20,7 @@ export default function DesktopCartComponent (props) {
     }, [])
     return (
 
-        <a href="/cart" className="hidden md:flex items-end mr-4 relative hover:text-blue-500">
+        <a href="/cart" className="hidden md:flex items-center mr-4 relative hover:text-blue-500">
             <i
                 className="cursor-pointer material-icons ml-2"
                 style={{ fontSize: 36 }}>

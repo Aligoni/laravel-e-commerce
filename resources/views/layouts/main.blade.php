@@ -209,10 +209,10 @@
 <body class="antialiased">
     <div class="flex flex-col min-h-screen w-screen relative">
         <div x-data="{ open: false }" class="z-10 fixed inset-x-0 top-0">
-            <div class="flex justify-between py-4 px-8 md:px-20 items-center bg-white shadow-md">
+            <div class="flex justify-between px-8 md:px-20 items-center bg-white shadow-md">
                 <a href="/"><img src="/images/app-logo.png" alt="" class="w-32 h-14"></a>
-                <nav class="flex justify-evenly items-center">
-                    <a href="{{ route('products') }}" class="hidden md:inline mx-4">
+                <nav class="flex justify-evenly items-stretch">
+                    <a href="{{ route('products') }}" class="{{request()->routeIs('products') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 pt-3 pb-2 hidden md:inline mx-4">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             apps
                         </i>
@@ -225,13 +225,13 @@
 
                     {{-- React Component 'DesktopCartComponent' --}}
                     @auth
-                        <div id="desktopCart" data-id="{{Auth::user()->id}}"></div>
+                        <div id="desktopCart" data-id="{{Auth::user()->id}}" class="{{request()->routeIs('cart') ? 'border-blue-600 text-blue-500' : 'border-white'}} border-b-4 pt-3 pb-2 flex"></div>
                     @else    
-                        <div id="desktopCart" ></div>
+                        <div id="desktopCart" class="border-white border-b-4 pt-3 pb-2 flex"></div>
                     @endauth
                 
                     {{-- React component 'DesktopSearchComponent' --}}
-                    <div id="desktopSearch"></div>
+                    <div id="desktopSearch" class="flex"></div>
                     
                     <!-- Hamburger -->
                     @auth
@@ -272,7 +272,7 @@
                         </x-dropdown>
                     </div>
                     @else
-                    <a href="{{ route('login') }}" class="mx-4 hidden sm:inline">
+                    <a href="{{ route('login') }}" class="border-white border-b-4 pt-3 pb-2 mx-4 hidden sm:inline">
                         <i class="material-icons hover:text-blue-500" style='font-size: 36px; line-height: inherit'>
                             exit_to_app
                         </i>
