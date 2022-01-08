@@ -85,6 +85,24 @@ export default function CustomerCareComponent(props) {
         }
     }, [showModal])
 
+    useEffect (() => {
+        if (message == '') {
+            let div = document.getElementsByClassName('message')
+            if (div.length > 0) {
+                div = div[div.length - 1]
+                div.scrollIntoView({ behavior: 'smooth' })
+            }
+        }
+    }, [messages])
+
+    const sendMessage = () => {
+        let item = message
+        item.trim()
+        if (message.trim() == '') return 
+        setMessage('')
+        setMessages([...messages, {sender: 'user', message}])
+    }
+
     return (
         <div>
             <div 
@@ -105,22 +123,27 @@ export default function CustomerCareComponent(props) {
                 >
                     {readyModal && 
                         <>
-                            <div class="bg-blue-600 w-full flex justify-between items center border-b border-gray-200 px-6 py-2">
-                                <p class="text-3xl text-white">Customer Care</p>
+                            <div className="bg-blue-600 w-full flex justify-between items center border-b border-gray-200 px-6 py-2">
+                                <p className="text-3xl text-white">Customer Care</p>
                                 <div onClick={() => setShowModal(false)}
-                                    class="text-white cursor-pointer py-1 inline-block text-center px-3 border border-transparent rounded-md font-semibold hover:text-white text-xl uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                                    className="text-white cursor-pointer py-1 inline-block text-center px-3 border border-transparent rounded-md font-semibold hover:text-white text-xl uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                                     X
                                 </div>
                             </div>
-                            <div className="flex-1 overflow-y-auto w-full p-2">
+                            <div className="flex-1 overflow-y-auto w-full px-2 my-2">
                                 {
                                     messages.length > 0 ?
                                         messages.map((item, i) => 
                                             <div 
                                                 key={i} 
-                                                className={`m-2 flex ${item.sender == 'admin' ? 'justify-start': 'justify-end'}`}
+                                                className={`message m-2 flex ${item.sender == 'admin' ? 'justify-start': 'justify-end'}`}
                                             >
-                                                <div className={`px-4 py-2 text-lg text-white ${item.sender == 'admin' ? 'rounded-r-full rounded-tl-full': 'rounded-l-full rounded-tr-full'} bg-blue-500`}>{item.message}</div>
+                                                <div 
+                                                    className={`px-4 py-2 text-lg text-white ${item.sender == 'admin' ? 'rounded-r-lg rounded-tl-lg': 'rounded-l-lg rounded-tr-lg'} bg-blue-500`}
+                                                    style={{ maxWidth: '60%' }}
+                                                >
+                                                    {item.message}
+                                                </div>
                                             </div>
                                         )
                                         : <div></div>
@@ -133,10 +156,13 @@ export default function CustomerCareComponent(props) {
                                     placeholder="Start typing..."
                                     className={`flex-1 `}
                                     value={message}
-                                    // onChange={searchTextChange}
+                                    onKeyPress={e => e.key == 'Enter' && sendMessage()}
                                     onChange={e => setMessage(e.target.value)}
                                 />
-                                <div className="cursor-pointer transition duration-200 transform hover:bg-blue-800 bg-blue-600 w-1/4 h-16 py-2 flex items-center justify-center">
+                                <div 
+                                    onClick={() => sendMessage()} 
+                                    className="cursor-pointer transition duration-200 transform hover:bg-blue-800 bg-blue-600 w-1/4 h-16 py-2 flex items-center justify-center"
+                                >
                                     <p className="font-bold text-white">Send Message</p>
                                 </div>
                             </div>
