@@ -1,15 +1,149 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+const demo = [
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+    {
+        sender: 'admin',
+        message: 'Testing messages'
+    },
+    {
+        sender: 'user',
+        message: "Speak for yourself man"
+    },
+]
+
 export default function CustomerCareComponent(props) {
+    const [readyModal, setReadyModal] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [messages, setMessages] = useState(demo)
+    const [message, setMessage] = useState('')
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        if (readyModal && !showModal) {
+            setShowModal(true)
+            inputRef.current && inputRef.current.focus()
+        }
+    }, [readyModal])
+
+    useEffect (() => {
+        if (readyModal && !showModal) {
+            setTimeout(() => setReadyModal(false), 500)
+        }
+    }, [showModal])
+
     return (
-        <div className="cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 w-20 h-20 flex items-center justify-center bg-blue-500" style={{borderRadius: 50}}>
-            <i
-                className="material-icons text-white"
-                style={{ fontSize: 36 }}>
-                chat
-            </i>   
+        <div>
+            <div 
+                onClick={() => setReadyModal(true)} 
+                className="cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 w-20 h-20 flex items-center justify-center bg-blue-500" 
+                style={{ borderRadius: 50 }}
+            >
+                <i
+                    className="material-icons text-white"
+                    style={{ fontSize: 36 }}>
+                    chat
+                </i>
+            </div>
+            <div className={`${readyModal ? 'flex flex-col items-center justify-center fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-25' : 'hidden'}`}>
+                <div 
+                    className={`flex flex-col items-center rounded shadow h-4/5 w-2/5 opacity-0 bg-white transition duration-500 ease-in-out ${showModal ? 'opacity-100 translate-y-4' : ''}`}
+                    // style={{height: '80%'}}
+                >
+                    {readyModal && 
+                        <>
+                            <div class="bg-blue-600 w-full flex justify-between items center border-b border-gray-200 px-6 py-2">
+                                <p class="text-3xl text-white">Customer Care</p>
+                                <div onClick={() => setShowModal(false)}
+                                    class="text-white cursor-pointer py-1 inline-block text-center px-3 border border-transparent rounded-md font-semibold hover:text-white text-xl uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                                    X
+                                </div>
+                            </div>
+                            <div className="flex-1 overflow-y-auto w-full p-2">
+                                {
+                                    messages.length > 0 ?
+                                        messages.map((item, i) => 
+                                            <div 
+                                                key={i} 
+                                                className={`m-2 flex ${item.sender == 'admin' ? 'justify-start': 'justify-end'}`}
+                                            >
+                                                <div className={`px-4 py-2 text-lg text-white ${item.sender == 'admin' ? 'rounded-r-full rounded-tl-full': 'rounded-l-full rounded-tr-full'} bg-blue-500`}>{item.message}</div>
+                                            </div>
+                                        )
+                                        : <div></div>
+                                }
+                            </div>
+                            <div className="w-full flex">
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder="Start typing..."
+                                    className={`flex-1 `}
+                                    value={message}
+                                    // onChange={searchTextChange}
+                                    onChange={e => setMessage(e.target.value)}
+                                />
+                                <div className="cursor-pointer transition duration-200 transform hover:bg-blue-800 bg-blue-600 w-1/4 h-16 py-2 flex items-center justify-center">
+                                    <p className="font-bold text-white">Send Message</p>
+                                </div>
+                            </div>
+                        </>
+                    }
+                </div>
+            </div>
         </div>
     )
 }
