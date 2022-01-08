@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Chat;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Events\MessageSent;
 use Auth;
 
 class ApiController extends Controller
@@ -41,6 +42,8 @@ class ApiController extends Controller
         $message->seen = 0;
 
         $message->save();
+        broadcast(new MessageSent($message));
+        
         return response()->json($message);
     }
 }
