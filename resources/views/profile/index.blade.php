@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="mt-28 p-4">
-    <div class="flex justify-center md:mx-10">
+<div class="my-20 p-4">
+    <div class="mt-8 flex justify-center md:mx-10">
         <p class="text-3xl">
             Profile
         </p>
