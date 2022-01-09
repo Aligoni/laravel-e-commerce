@@ -16,7 +16,6 @@ export default function MobileSearchComponent() {
         setLoading(true)
         axios.get(`/api/products`)
             .then(response => {
-                console.log(response)
                 if (response.status == 200) {
                     setProducts(response.data)
                 }

@@ -10,7 +10,6 @@ export default function DesktopCartComponent (props) {
         if (props.id) {
             axios.get(`/api/cart/${props.id}`)
             .then(response => {
-                console.log(response)
                 setCartItems(response.data.length +'')
             }).catch(function (thrown) {
                 console.log(thrown)

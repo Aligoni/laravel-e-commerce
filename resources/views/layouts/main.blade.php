@@ -421,7 +421,7 @@
         @include('include.feedback')
         
         @auth
-            <div id="customerCare" data-user="{{Auth::user()}}" class="shadow-xl fixed right-10 bottom-10" style="border-radius: 50%"></div>
+            <div id="customerCare" data-id="{{Auth::user()->id}}" class="shadow-xl fixed right-10 bottom-10" style="border-radius: 50%"></div>
         @endauth
     </div>
 </body>

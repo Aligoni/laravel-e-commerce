@@ -42,7 +42,7 @@ class ApiController extends Controller
         $message->seen = 0;
 
         $message->save();
-        broadcast(new MessageSent($message));
+        broadcast(new MessageSent($message))->toOthers();
         
         return response()->json($message);
     }

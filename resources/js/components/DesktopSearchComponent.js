@@ -17,7 +17,6 @@ export default function DesktopSearchComponent() {
         setLoading(true)
         axios.get(`/api/products`)
         .then(response => {
-            console.log(response)
             if (response.status == 200) {
                 setProducts(response.data)
             }
@@ -49,8 +48,6 @@ export default function DesktopSearchComponent() {
         axios.get(`/api/products/search/${e.target.value}`, {
             cancelToken: axiosHandler.token,
         }).then(response => {
-            console.log(response)
-            console.log(e.target.value)
             if (response.status == 200) {
                 setSearchResults(response.data)
             }
