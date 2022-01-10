@@ -84,6 +84,10 @@
             box-shadow: 1px 1px 5px rgb(83, 81, 81);
         }
 
+        #adminCustomerCare {
+            z-index: 15;
+        }
+
         .cart-image img {
             position: absolute;
             top: 50%;
@@ -216,6 +220,11 @@
         @yield('content')
 
         @include('include.feedback')
+
+        <div 
+            id="adminCustomerCare"
+            class="shadow-xl fixed right-10 bottom-10"
+            style="border-radius: 50%"></div>
     </div>
 </body>
 

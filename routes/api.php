@@ -22,6 +22,18 @@ Route::get('/products',
 Route::get('/products/search/{text}', 
     [App\Http\Controllers\ApiController::class, 'searchProducts']);
 
+Route::get('/chat', 
+    [App\Http\Controllers\ApiController::class, 'getAllChat']);
+
+Route::get('/chat/{id}', 
+    [App\Http\Controllers\ApiController::class, 'getUserChat']);
+
+Route::post('/chat', 
+    [App\Http\Controllers\ApiController::class, 'sendMessage']);
+
+Route::get('/users',
+    [App\Http\Controllers\ApiController::class, 'getAllCustomers']);
+    
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

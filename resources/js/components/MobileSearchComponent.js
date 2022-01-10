@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import FilterResults from 'react-filter-search'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
@@ -8,7 +9,22 @@ export default function MobileSearchComponent() {
     const [searchText, setSearchText] = useState('')
     const [loading, setLoading] = useState(false)
     const [searchResults, setSearchResults] = useState([])
+    const [products, setProducts] = useState([])
     const inputRef = useRef(null)
+
+    useEffect(() => {
+        setLoading(true)
+        axios.get(`/api/products`)
+            .then(response => {
+                if (response.status == 200) {
+                    setProducts(response.data)
+                }
+                setLoading(false)
+            }).catch(function (thrown) {
+                console.log(thrown)
+                setLoading(false)
+            });
+    }, [])
 
     useEffect(() => {
         if (showSearch) {
@@ -70,38 +86,40 @@ export default function MobileSearchComponent() {
                         placeholder="Start typing..."
                         className="flex-1 rounded"
                         value={searchText}
-                        onChange={searchTextChange}
+                        // onChange={searchTextChange}
+                        onChange={e => setSearchText(e.target.value)}
                     />
                     <div onClick={() => setShowSearch(false)} className="ml-4 p-2 cursor-pointer text-2xl mx-2 text-gray-700 font-bold hover:text-blue-500">
                         X
                     </div>
                 </div>
 
-                {searchText &&
-                    <div className="mt-2 mx-8 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
-                        {loading &&
-                            <div className="loader m-2"></div>
-                        }
-                        {searchResults.length ?
-                            searchResults.map((item, i) =>
-                                <a href={`/products/${item.id}`} key={i} className="w-full flex mx-2 border-t border-gray-200 items-center flex hover:bg-gray-100">
-                                    <div className="relative cart-image flex-1 h-24">
-                                        <img src={item.image} alt="prd_image" />
-                                    </div>
-                                    <div className="flex flex-col items-center justify-center text-center" style={{ flex: 2 }}>
-                                        <p className="text-lg">{item.name}</p>
-                                        <p className="text-lg">{item.type}</p>
-                                        {/* <p className="text-lg">{item.price}</p> */}
-                                    </div>
-                                </a>
-                            ) :
-                            !loading &&
-                            <div className="w-full text-center text-gray-400 text-lg italic border-t border-gray-200 py-2">
-                                Sorry, item not found :(
-                            </div>
-                        }
-                    </div>
-                }
+                <FilterResults
+                    value={searchText}
+                    data={products}
+                    renderResults={searchResults =>
+                        searchText && <div className="mt-2 mx-8 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
+                            {searchResults.length && searchText ?
+                                searchResults.map((item, i) =>
+                                    <a href={`/products/${item.id}`} key={i} className="w-full flex mx-2 border-t border-gray-200 items-center flex hover:bg-gray-100">
+                                        <div className="relative cart-image flex-1 h-24">
+                                            <img src={item.image} alt="prd_image" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center text-center" style={{ flex: 2 }}>
+                                            <p className="text-lg">{item.name}</p>
+                                            <p className="text-lg">{item.type}</p>
+                                            {/* <p className="text-lg">{item.price}</p> */}
+                                        </div>
+                                    </a>
+                                ) :
+                                !loading &&
+                                <div className="w-full text-center text-gray-400 text-lg italic border-t border-gray-200 py-2">
+                                    Sorry, item not found :(
+                                </div>
+                            }
+                        </div>
+                    }
+                />
             </div>}
         </div>
     )

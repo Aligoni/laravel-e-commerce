@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Uuid;
 
-class Product extends Model
+class Chat extends Model
 {
     use HasFactory, Uuid;
 
-    public function cart() {
-        return $this->hasMany('App\Models\Cart');
+    public function user () {
+        return $this->belongsTo('App\Model\User');
     }
 }
