@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Cart;
 use App\Models\Chat;
 use App\Models\Order;
@@ -32,6 +33,22 @@ class ApiController extends Controller
     public function getUserChat ($id) {
         $messages = Chat::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
         return response()->json($messages);
+    }
+
+    public function getAllCustomers () {
+        // This doesnt get me chats in order
+        // $users = User::where('role', 'CUSTOMER')->with('chat')->orderBy('created_at', 'desc')->get();
+
+        $users = User::where('role', 'CUSTOMER')->orderBy('created_at', 'desc')->get();
+
+        if (count($users) > 0) {
+            foreach ($users as &$user) {
+                $messages = Chat::where('user_id', $user->id)->orderBy('updated_at', 'asc')->get();
+                $user->chat = $messages;
+            }
+        }
+        
+        return response()->json($users);
     }
 
     public function sendMessage(Request $request) {
