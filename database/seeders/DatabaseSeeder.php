@@ -7,6 +7,9 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\OrderProduct;
 use Illuminate\Database\Seeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\OrderSeeder;
+use Database\Seeders\ProductSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,8 +20,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
-        // Product::factory()->create();
-        OrderProduct::factory()->create();
+        $this->call([
+            UserSeeder::class,
+            ProductSeeder::class,   
+            OrderSeeder::class, 
+        ]);
     }
 }
