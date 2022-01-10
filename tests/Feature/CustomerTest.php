@@ -8,7 +8,9 @@ use Tests\TestCase;
 
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderProduct;
 
 class CustomerTest extends TestCase
 {
@@ -37,7 +39,7 @@ class CustomerTest extends TestCase
         $response->assertViewIs('auth.login');
     }
 
-    public function test_products_user_can_view_products() {
+    public function test_user_can_view_all_products() {
         $products = Product::factory()->count(5)->create();
 
         $response = $this
@@ -45,7 +47,7 @@ class CustomerTest extends TestCase
             ->get('/products');
 
         $response->assertOk();
-        $response->assertSee(array_column($products->toArray(), 'product_id'));
+        $response->assertSee(array_column($products->toArray(), 'name'));
     }
     
     public function test_user_can_view_product_in_stock() {
@@ -242,8 +244,6 @@ class CustomerTest extends TestCase
     }
 
     public function test_unauthorized_user_cannot_view_profile_and_is_redirected() {
-        // $user = User::factory()->create();
-
         $response = $this
             ->followingRedirects()
             ->get('/profile');
@@ -327,5 +327,24 @@ class CustomerTest extends TestCase
             ]);
 
         $response->assertViewIs('auth.login');
+    }
+
+    public function test_authorized_user_can_view_orders_in_profile_page_after_checkout () {
+        $user = User::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $orderProduct = OrderProduct::factory()->create([
+            'order_id' => $order->id,
+        ]);
+
+        $response = $this
+            ->followingRedirects()
+            ->actingAs($user)
+            ->get('/profile');
+
+        $response->assertViewIs('profile.index');
+        // add assertion to check equality of orders
     }
 }
