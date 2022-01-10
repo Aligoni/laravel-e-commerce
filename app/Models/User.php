@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function order() {
         return $this->hasMany('App\Models\Order');
     }
+    
+    public function chat() {
+        return $this->hasMany('App\Models\Chat');
+    }
 }

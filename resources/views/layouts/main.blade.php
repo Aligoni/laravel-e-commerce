@@ -161,6 +161,10 @@
             padding: 5px;
         }
 
+        #customerCare {
+            z-index: 15;
+        }
+
         .alert {
             position: fixed;
             z-index: 40;
@@ -399,7 +403,26 @@
         
         @yield('content')
 
+        <div class="flex justify-evenly pt-10" style="background-color: rgb(19, 19, 19)">
+            <img class="m-10 w-44 h-32" src="/images/app-logo.png" alt="" />
+            <div class="m-10 px-10 text-center" style="width: 30%">
+                <p class="text-2xl text-gray-200">About This Website</p>
+                <p class="text-lg text-gray-400">
+                    Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
+                    Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
+                </p>
+            </div>
+            <div class="m-10" style="width: 30%">
+                <p class="text-2xl text-gray-200 text-center">Where you can find us</p>
+            </div>
+        </div>
+        <div class="bg-gray-600 text-gray-200 p-2 text-center text-lg">© 2022 Copyright: K-Clothing</div>
+        
         @include('include.feedback')
+        
+        @auth
+            <div id="customerCare" data-id="{{Auth::user()->id}}" class="shadow-xl fixed right-10 bottom-10" style="border-radius: 50%"></div>
+        @endauth
     </div>
 </body>
 
