@@ -61,6 +61,9 @@ export default function CustomerCareComponent(props) {
         .then(response => {
             console.log(response.data);
 
+        })
+        .catch(response => {
+            console.log(response)
         });
         setMessage('')
         setMessages([...messages, {sender: 'user', message}])
