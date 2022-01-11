@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Auth;
+use Mail;
 
 class CartController extends Controller
 {
@@ -95,6 +96,19 @@ class CartController extends Controller
 
             $item->delete();
         }
+
+        $user = Auth()->user();
+
+        $data = array(
+            'name'=> $user->name,
+            'content'=> "Your order has been placed successfully."
+        );
+        
+        Mail::send('mail.order', $data, function($message) use ($user) {
+            $message->to($user->email, $user->name)->subject
+                ('Order confirmed');
+            $message->from('xyz@gmail.com','K-Clothing Administrator');
+        });
 
         return redirect()->route('profile')->with('message', 'Order Placed Successfully');
     }

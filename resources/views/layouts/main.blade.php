@@ -13,6 +13,7 @@
     {{-- Bootstrap Icons --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://kit.fontawesome.com/f3136aef18.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -198,9 +199,13 @@
                 opacity: 1;
             }
 
+            80% {
+                top: 50px;
+            }
+            
             100% {
                 opacity: 0;
-                display: none;
+                top: -50px;
             }
         }
 
@@ -403,17 +408,35 @@
         
         @yield('content')
 
-        <div class="flex justify-evenly pt-10" style="background-color: rgb(19, 19, 19)">
+        <div class="flex flex-col md:flex-row justify-evenly items-center md:items-start pt-10 pb-5" style="background-color: rgb(19, 19, 19)">
             <img class="m-10 w-44 h-32" src="/images/app-logo.png" alt="" />
-            <div class="m-10 px-10 text-center" style="width: 30%">
+            <div class="m-10 px-10 text-center md:w-1/3">
                 <p class="text-2xl text-gray-200">About This Website</p>
-                <p class="text-lg text-gray-400">
-                    Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
-                    Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
+                <p class="mt-5 text-lg text-gray-400">
+                    K-Clothing is an online shopping mall where customers can order products at an affordable price.
+                    We provide good services and customer care
                 </p>
             </div>
-            <div class="m-10" style="width: 30%">
+            <div class="m-10 ms:w-1/3">
                 <p class="text-2xl text-gray-200 text-center">Where you can find us</p>
+                <div class="flex justify-evenly mt-8">
+                    <a href="" class="">
+                        <i class="mx-4 fab fa-facebook-f text-blue-500 hover:text-blue-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105" style='font-size: 40px; line-height: inherit'>
+                        </i>
+                    </a>
+                    <a href="" class="">
+                        <i class="mx-4 fab fa-twitter text-blue-500 hover:text-blue-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105" style='font-size: 40px; line-height: inherit'>
+                        </i>
+                    </a>
+                    <a href="" class="">
+                        <i class="mx-4 fab fa-instagram text-blue-500 hover:text-blue-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105" style='font-size: 40px; line-height: inherit'>
+                        </i>
+                    </a>
+                    <a href="" class="">
+                        <i class="mx-4 fab fa-whatsapp text-blue-500 hover:text-blue-800 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105" style='font-size: 40px; line-height: inherit'>
+                        </i>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="bg-gray-600 text-gray-200 p-2 text-center text-lg">© 2022 Copyright: K-Clothing</div>

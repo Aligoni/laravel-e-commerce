@@ -2,12 +2,13 @@
 
 @section('content')
     <div class="mt-20 py-10 mx-2 md:mx-20">
-        <div class="flex justify-between items-center mx-4">
-            <p class="text-3xl">Products</p>
-            <p class="text-xl text-blue-500">{{count($products)}} Item(s) found</p>
+        <div class="flex justify-start items-center mx-4">
+            <p class="text-3xl">All Products</p>
+            {{-- <p class="text-xl text-blue-500">{{count($products)}} Item(s) found</p> --}}
         </div>
 
         @if (count($products) > 0)
+            {{$products->links()}}
             <div class="flex justify-start w-full flex-wrap">
                 @foreach ($products as $item)
                     <div class="product-card shadow-lg relative">
@@ -29,6 +30,7 @@
                     </div>
                 @endforeach
             </div>
+            {{$products->links()}}
         @else
             <div class="single-card flex justify-center items-center" style="background: initial">
                 <p class="text-4xl text-center text-blue-800">NO PRODUCT YET</p>

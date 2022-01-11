@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Events\MessageSent;
 use Auth;
+use Mail;
 
 class ApiController extends Controller
 {
@@ -59,7 +60,21 @@ class ApiController extends Controller
         $message->seen = 0;
 
         $message->save();
+        
         broadcast(new MessageSent($message))->toOthers();
+        
+        $user = User::find($request->user_id);
+
+        $data = array(
+            'name'=> $user->name,
+            'content'=> "You have been sent a message. Please quickly review"
+        );
+        
+        Mail::send('mail.order', $data, function($message) use ($user) {
+            $message->to($user->email, $user->name)->subject
+                ("You've got a message!");
+            $message->from('xyz@gmail.com','K-Clothing Administrator');
+        });
         
         return response()->json($message);
     }
