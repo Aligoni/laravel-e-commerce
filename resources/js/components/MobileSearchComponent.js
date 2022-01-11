@@ -98,7 +98,7 @@ export default function MobileSearchComponent() {
                     value={searchText}
                     data={products}
                     renderResults={searchResults =>
-                        searchText && <div className="mt-2 mx-8 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
+                        searchText && <div className="mt-2 mx-8 pverflow-y-auto overflow-x-hidden bg-white border border-gray-300 rounded shadow-md flex flex-col items-center" style={{ maxHeight: 500 }}>
                             {searchResults.length && searchText ?
                                 searchResults.map((item, i) =>
                                     <a href={`/products/${item.id}`} key={i} className="w-full flex mx-2 border-t border-gray-200 items-center flex hover:bg-gray-100">

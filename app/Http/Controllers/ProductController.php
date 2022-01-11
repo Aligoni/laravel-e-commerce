@@ -15,7 +15,7 @@ class ProductController extends Controller
 
         // caching products for 5 seconds to improve performance
         $products = cache()->remember("all-products", 5, function () {
-            return Product::orderBy('updated_at', 'desc')->get();
+            return Product::orderBy('updated_at', 'desc')->paginate(16);
         });
         
         return view('products.index', [ 'products'=> $products ]);
