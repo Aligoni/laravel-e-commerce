@@ -66,6 +66,17 @@ class CustomerController extends Controller
         $customer->role = 'ADMIN';
         $customer->save();
 
+        $user = $customer->fresh();
+        $data = array(
+            'name'=> $user->name,
+            'content'=> "You have been upgraded to Admin Role"
+        );
+        
+        Mail::send('mail.order', $data, function($message) use ($user) {
+            $message->to($user->email, $user->name)->subject
+                ("Account Upgrade!");
+            $message->from('xyz@gmail.com','K-Clothing Administrator');
+        });
         return redirect()->route('admin.customer')->with('message', 'Customer upgraded to Admin role successfully');
 
     }

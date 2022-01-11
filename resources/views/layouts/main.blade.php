@@ -198,9 +198,13 @@
                 opacity: 1;
             }
 
+            80% {
+                top: 50px;
+            }
+            
             100% {
                 opacity: 0;
-                display: none;
+                top: -50px;
             }
         }
 
