@@ -61,6 +61,8 @@ class ApiController extends Controller
 
         $message->save();
         
+        broadcast(new MessageSent($message))->toOthers();
+        
         $user = User::find($request->user_id);
 
         $data = array(
@@ -73,8 +75,6 @@ class ApiController extends Controller
                 ("You've got a message!");
             $message->from('xyz@gmail.com','K-Clothing Administrator');
         });
-
-        broadcast(new MessageSent($message))->toOthers();
         
         return response()->json($message);
     }
