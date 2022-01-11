@@ -2,69 +2,6 @@ import React, {useState, useEffect, useRef} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-const demo = [
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-    {
-        sender: 'admin',
-        message: 'Testing messages'
-    },
-    {
-        sender: 'user',
-        message: "Speak for yourself man"
-    },
-]
-
 export default function CustomerCareComponent(props) {
     const [readyModal, setReadyModal] = useState(false)
     const [showModal, setShowModal] = useState(false)
