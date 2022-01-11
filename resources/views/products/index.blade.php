@@ -8,6 +8,7 @@
         </div>
 
         @if (count($products) > 0)
+            {{$products->links()}}
             <div class="flex justify-start w-full flex-wrap">
                 @foreach ($products as $item)
                     <div class="product-card shadow-lg relative">
