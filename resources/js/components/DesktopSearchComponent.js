@@ -80,18 +80,18 @@ export default function DesktopSearchComponent() {
                     value={searchText}
                     data={products}
                     renderResults={searchResults =>
-                        searchText && <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center">
+                        searchText && <div className="absolute overflow-y-auto overflow-x-hidden left-0 right-0 mt-2 bg-white border border-gray-300 rounded shadow-md flex flex-col items-center" style={{maxHeight: 600}}>
                             {
                                 searchResults.length && searchText ?
                                     searchResults.map((item, i) =>
                                         <a href={`/products/${item.id}`} key={i} className="w-full flex mx-2 border-t border-gray-200 items-center flex hover:bg-gray-100">
-                                            <div className="relative cart-image flex-1 h-24">
+                                            <div className="relative cart-image flex-1 h-28">
                                                 <img src={item.image} alt="prd_image" />
                                             </div>
                                             <div className="flex flex-col items-center justify-center text-center" style={{ flex: 2 }}>
                                                 <p className="text-lg">{item.name}</p>
                                                 <p className="text-lg">{item.type}</p>
-                                                {/* <p className="text-lg">{item.price}</p> */}
+                                                <p className="text-lg">{item.price}</p>
                                             </div>
                                         </a>
                                     ) :
