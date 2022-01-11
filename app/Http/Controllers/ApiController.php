@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Events\MessageSent;
 use Auth;
+use Mail;
 
 class ApiController extends Controller
 {
@@ -60,7 +61,7 @@ class ApiController extends Controller
 
         $message->save();
         
-        $user = User::find($id);
+        $user = User::find($request->user_id);
 
         $data = array(
             'name'=> $user->name,
